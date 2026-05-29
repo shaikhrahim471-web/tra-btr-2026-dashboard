@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRA Research — BTR 2026 Outreach Dashboard</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f0ede6;--card:#fff;--border:#e4e0d8;--text:#1c1a17;
+  --muted:#6b6760;--faint:#a09c96;
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+/* HEADER */
+header{
+  background:#1c1a17;padding:16px 28px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  position:sticky;top:0;z-index:200;
+}
+.hd-left h1{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;letter-spacing:-0.2px}
+.hd-left p{font-size:11px;color:#6b6760;margin-top:2px}
+.hd-stats{display:flex;gap:20px}
+.hs{text-align:center}
+.hs-n{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;line-height:1}
+.hs-l{font-size:9px;color:#6b6760;text-transform:uppercase;letter-spacing:0.8px;margin-top:2px}
+.hs-n.na{color:#4ade80}.hs-n.nb{color:#60a5fa}.hs-n.nc{color:#9ca3af}
+.hs-n.np{color:#f87171}.hs-n.nm{color:#34d399}
+
+/* TOOLBAR */
+.toolbar{
+  background:#fff;border-bottom:1px solid var(--border);
+  padding:10px 28px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;
+  position:sticky;top:57px;z-index:199;
+}
+.srch{
+  font-family:'Inter',sans-serif;font-size:12px;padding:7px 12px;
+  border:1px solid var(--border);border-radius:6px;
+  background:var(--bg);color:var(--text);width:220px;outline:none;
+}
+.srch:focus{border-color:#6b6760}
+.fbar{display:flex;gap:5px;flex-wrap:wrap}
+.fb{
+  font-size:11px;font-weight:500;padding:4px 11px;border-radius:16px;
+  border:1.5px solid var(--border);background:var(--card);color:var(--muted);
+  cursor:pointer;white-space:nowrap;transition:all 0.12s;font-family:'Inter',sans-serif;
+}
+.fb:hover{border-color:var(--muted);color:var(--text)}
+.fb.on{color:#fff;border-color:transparent}
+.fb.on.x0{background:#1c1a17}
+.fb.on.xA{background:#166534}
+.fb.on.xB{background:#1e40af}
+.fb.on.xC{background:#4b5563}
+.fb.on.xP{background:#991b1b}
+.fb.on.xM{background:#065f46}
+.fb.on.xW{background:#92400e}
+.fb.on.xN{background:#065f46}
+.fb.on.xU{background:#1e3a5f}
+.fb.on.xG{background:#831843}
+.cb{font-size:11px;color:var(--faint);margin-left:auto;white-space:nowrap}
+
+/* GRID */
+.grid{padding:20px 28px;display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:12px}
+
+/* CARD */
+.card{
+  background:var(--card);border:1px solid var(--border);border-radius:10px;
+  overflow:hidden;display:flex;flex-direction:column;
+  transition:box-shadow 0.15s,transform 0.12s;
+}
+.card:hover{box-shadow:0 4px 18px rgba(0,0,0,0.09);transform:translateY(-1px)}
+
+/* tier strip */
+.strip{height:3px}
+.strip.A{background:linear-gradient(90deg,#16a34a,#86efac)}
+.strip.B{background:linear-gradient(90deg,#2563eb,#93c5fd)}
+.strip.C{background:linear-gradient(90deg,#6b7280,#d1d5db)}
+
+/* HEAD */
+.card-head{padding:11px 13px 8px;display:flex;align-items:flex-start;gap:9px}
+.tbox{
+  width:28px;height:28px;border-radius:6px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-size:11px;font-weight:700;
+}
+.tbox.A{background:#dcfce7;color:#166534}
+.tbox.B{background:#dbeafe;color:#1e40af}
+.tbox.C{background:#f3f4f6;color:#4b5563}
+.binfo{flex:1;min-width:0}
+.bname{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;line-height:1.2}
+.bcat{font-size:10px;color:var(--muted);margin-top:1px;line-height:1.3}
+.hqtag{
+  font-size:9.5px;font-weight:500;padding:2px 7px;border-radius:5px;
+  background:var(--bg);color:var(--muted);border:1px solid var(--border);
+  white-space:nowrap;flex-shrink:0;align-self:flex-start;
+}
+
+/* STATUS */
+.srow{padding:0 13px 9px}
+.sbadge{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:10.5px;font-weight:500;padding:3px 10px;border-radius:12px;
+  cursor:pointer;user-select:none;transition:opacity 0.1s;
+}
+.sbadge:hover{opacity:0.75}
+.sdot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+/* status colours */
+.s-not_contacted{background:#f3f4f6;color:#374151}
+.s-not_contacted .sdot{background:#9ca3af}
+.s-contacted_no_response{background:#fef3c7;color:#92400e}
+.s-contacted_no_response .sdot{background:#f59e0b}
+.s-meeting_scheduled{background:#d1fae5;color:#065f46}
+.s-meeting_scheduled .sdot{background:#10b981}
+.s-proposal_sent{background:#dbeafe;color:#1e40af}
+.s-proposal_sent .sdot{background:#3b82f6}
+.s-warm{background:#ffedd5;color:#9a3412}
+.s-warm .sdot{background:#f97316}
+.s-waiting{background:#ede9fe;color:#5b21b6}
+.s-waiting .sdot{background:#8b5cf6}
+.s-closed{background:#f3f4f6;color:#9ca3af}
+.s-closed .sdot{background:#d1d5db}
+
+/* dropdown */
+.swrap{position:relative;display:inline-block}
+.smenu{
+  display:none;position:absolute;top:calc(100% + 4px);left:0;z-index:400;
+  background:#fff;border:1px solid var(--border);border-radius:8px;
+  box-shadow:0 8px 28px rgba(0,0,0,0.13);min-width:195px;overflow:hidden;
+}
+.smenu.open{display:block}
+.sitem{
+  font-size:11px;padding:8px 12px;cursor:pointer;
+  display:flex;align-items:center;gap:8px;transition:background 0.1s;
+}
+.sitem:hover{background:var(--bg)}
+.sdot2{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* PAIN — always visible */
+.pain{
+  margin:0 13px 9px;padding:7px 10px;border-radius:6px;
+  background:#fef2f2;border-left:3px solid #ef4444;
+  font-size:10.5px;color:#7f1d1d;line-height:1.45;
+  display:flex;gap:6px;
+}
+.pain-icon{flex-shrink:0;font-size:11px;margin-top:1px}
+
+/* BODY */
+.cbody{padding:0 13px;flex:1;display:flex;flex-direction:column;gap:8px;padding-bottom:1px}
+
+/* contact */
+.cname{font-size:12.5px;font-weight:600}
+.ctitle{font-size:10.5px;color:var(--muted);margin-top:1px;line-height:1.3}
+.cpills{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+.pill{
+  display:inline-flex;align-items:center;gap:3px;font-size:10px;
+  padding:2px 8px;border-radius:8px;text-decoration:none;
+  border:1px solid var(--border);color:var(--muted);background:var(--bg);white-space:nowrap;
+}
+.pill:hover{border-color:#9b9890;color:var(--text)}
+.pill.li{border-color:#0077b5;color:#0077b5}
+.pill.li:hover{background:#e8f4fb}
+.pill.wa{border-color:#25d366;color:#15803d;background:#f0fdf4}
+.pill.em{border-color:#6366f1;color:#4338ca}
+.nocon{
+  font-size:10.5px;padding:6px 9px;border-radius:6px;
+  background:#fce7f3;color:#831843;border-left:3px solid #ec4899;font-style:italic;
+}
+
+/* tags */
+.tags{display:flex;gap:4px;flex-wrap:wrap}
+.tag{font-size:9.5px;font-weight:500;padding:2px 7px;border-radius:7px}
+.tag.tr{background:#fef3c7;color:#78350f}
+.tag.nl{background:#d1fae5;color:#065f46}
+.tag.gp{background:#fce7f3;color:#831843}
+.tag.wn{background:#fff7ed;color:#9a3412}
+
+/* notes */
+.nblock{
+  font-size:10.5px;padding:6px 9px;border-radius:6px;
+  background:#eff6ff;color:#1e3a5f;border-left:3px solid #3b82f6;line-height:1.4;
+}
+.nlabel{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:#3b82f6;margin-bottom:2px}
+
+/* warning */
+.wblock{
+  font-size:10.5px;padding:6px 9px;border-radius:6px;
+  background:#fffbeb;color:#78350f;border-left:3px solid #f59e0b;line-height:1.4;
+}
+
+/* pitch */
+.pblock{
+  font-size:10.5px;padding:6px 9px;border-radius:6px;
+  background:#f8f7f4;color:var(--muted);border-left:3px solid var(--border);line-height:1.4;
+}
+.plabel{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--faint);margin-bottom:2px}
+
+/* FOOT */
+.cfoot{
+  padding:8px 13px;border-top:1px solid var(--border);background:#fafaf8;
+  display:flex;align-items:center;justify-content:space-between;margin-top:9px;
+}
+.sbadge2{
+  font-size:9.5px;font-weight:500;padding:2px 8px;border-radius:7px;
+  background:var(--card);border:1px solid var(--border);color:var(--muted);
+}
+.empty{grid-column:1/-1;text-align:center;padding:60px;color:var(--faint);font-size:14px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hd-left">
+    <h1>TRA Research &mdash; BTR 2026 Outreach Dashboard</h1>
+    <p>Brand Trust Report 2026 &nbsp;&middot;&nbsp; 96 brands &nbsp;&middot;&nbsp; Sorted by urgency &nbsp;&middot;&nbsp; Click any status to update</p>
+  </div>
+  <div class="hd-stats">
+    <div class="hs"><div class="hs-n na" id="sa">—</div><div class="hs-l">Tier A</div></div>
+    <div class="hs"><div class="hs-n nb" id="sb">—</div><div class="hs-l">Tier B</div></div>
+    <div class="hs"><div class="hs-n nc" id="sc">—</div><div class="hs-l">Tier C</div></div>
+    <div class="hs"><div class="hs-n np" id="sp">—</div><div class="hs-l">Pain points</div></div>
+    <div class="hs"><div class="hs-n nm" id="sm">—</div><div class="hs-l">Meetings</div></div>
+  </div>
+</header>
+
+<div class="toolbar">
+  <input class="srch" type="text" id="srch" placeholder="Search brand, name, city, category…" oninput="render()">
+  <div class="fbar">
+    <button class="fb on x0" onclick="sf('all',this)">All</button>
+    <button class="fb xA" onclick="sf('A',this)">Tier A</button>
+    <button class="fb xB" onclick="sf('B',this)">Tier B</button>
+    <button class="fb xC" onclick="sf('C',this)">Tier C</button>
+    <button class="fb xP" onclick="sf('pain',this)">🔴 Pain point</button>
+    <button class="fb xM" onclick="sf('meet',this)">📅 Meeting</button>
+    <button class="fb xW" onclick="sf('warm',this)">🔥 Warm</button>
+    <button class="fb xN" onclick="sf('new',this)">✦ New leader</button>
+    <button class="fb xU" onclick="sf('mum',this)">Mumbai HQ</button>
+    <button class="fb xG" onclick="sf('gap',this)">⚠ Missing contact</button>
+  </div>
+  <div class="cb" id="cb">Loading…</div>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<script>
+const SL={
+  not_contacted:'Not contacted',
+  contacted_no_response:'Contacted — no response',
+  meeting_scheduled:'Meeting scheduled',
+  proposal_sent:'Proposal sent',
+  warm:'Warm — following up',
+  waiting:'Waiting (call back later)',
+  closed:'Not interested / Closed'
+};
+const SC={
+  not_contacted:'#9ca3af',contacted_no_response:'#f59e0b',
+  meeting_scheduled:'#10b981',proposal_sent:'#3b82f6',
+  warm:'#f97316',waiting:'#8b5cf6',closed:'#d1d5db'
+};
+
+const RAW=[{"brand": "LIVA", "cat": "FABRICS - SUSTAINABLE", "name": "Priyanaka Priyadarshani", "desig": "VP national head", "phone": "have on whatsapp", "email": "", "url": "", "notes": "has agreed for a meeting but not able to book a slot check with her on 2.3.26", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "Greenwashing scrutiny.", "trust": false, "newlead": false, "pitch": "Priyanaka has agreed for meeting per notes. Follow up urgently to book slot.", "warning": "Meeting agreed but slot not booked. Act now - 2.3.26 note suggests this is overdue.", "status": "meeting_scheduled"}, {"brand": "NOISE", "cat": "SMART WEARABLES", "name": "Shantanu Chauhan", "desig": "Director - Marketing (Brand & Growth)", "phone": "have on whatsapp", "email": "", "url": "https://www.linkedin.com/in/shantanu-chauhan-/", "notes": "finally reached out top him and he seems excieted about winning played the boat angle", "strategy": "", "tier": "A", "hq": "Gurugram", "pain": "India smartwatch shipments fell 27% YoY Q2 2025.", "trust": false, "newlead": true, "pitch": "Category declining means trust differentiation matters more. Your notes say Shantanu is excited about winning.", "warning": "Shantanu Chauhan Director Marketing from your file is correct. He is excited per your notes - act fast.", "status": "contacted_no_response"}, {"brand": "CIPLA", "cat": "PHARMACEUTICALS - INDIAN", "name": "Karishma Bajaj", "desig": "Head Of Marketing", "phone": "+91 98194 36275", "email": "karishma.bajaj1@cipla.com", "url": "https://www.linkedin.com/in/karishma-bajaj-097452141/", "notes": "", "strategy": "", "tier": "A", "hq": "Mumbai", "pain": "Dual leadership transition - new CEO Apr 2026.", "trust": true, "newlead": true, "pitch": "Trust is Cipla own language. Double new-leadership window.", "warning": "Karishma Bajaj Head of Marketing from your file is right level. Use her.", "status": "not_contacted"}, {"brand": "HDFC ERGO", "cat": "GENERAL INSURANCE - PRIVATE", "name": "Neha S Bhattacharyya", "desig": "Senior Vice President Marketing", "phone": "919930250258", "email": "neha.bhattacharyya@hdfcergo.com", "url": "https://www.linkedin.com/in/neha-sb/", "notes": "", "strategy": "", "tier": "A", "hq": "Mumbai", "pain": "New CEO from Apr 2026 - leadership transition.", "trust": true, "newlead": true, "pitch": "New CEO = best window for new brand initiative. Insurance = 100% trust category.", "warning": "Neha Bhattacharyya SVP Marketing in your file is correct. Use her.", "status": "not_contacted"}, {"brand": "SKODA", "cat": "FOUR WHEELER - PREMIUM", "name": "Ashish Gupta", "desig": "Brand Director - Skoda India", "phone": "+91 98719 74123", "email": "+91 88796 79918", "url": "https://www.linkedin.com/in/ashish-g-7250b08/", "notes": "Have sent inmail", "strategy": "Meeting route", "tier": "A", "hq": "Pune", "pain": "", "trust": false, "newlead": true, "pitch": "Two wins premium and SUV - one conversation. New Brand Director May 2025.", "warning": "Ashish Gupta Brand Director from your file is correct. InMail sent per notes.", "status": "contacted_no_response"}, {"brand": "DAIKIN", "cat": "AIR CONDITIONERS", "name": "Manoj Agarwal", "desig": "Vice President - Marketing & Product Management", "phone": "1839780049384", "email": "manoj.agarwal@daikinindia.com", "url": "https://www.linkedin.com/in/manoj-agarwal-88aa1baa", "notes": "has agreed for a meeting which will be scheduled next week", "strategy": "Meeting route", "tier": "C", "hq": "Unknown", "pain": "", "trust": false, "newlead": false, "pitch": "Review needed.", "warning": "", "status": "meeting_scheduled"}, {"brand": "OLX", "cat": "INTERNET CLASSIFIEDS", "name": "Pratyash Sharma", "desig": "Marketing Lead", "phone": "have on whatsapp", "email": "", "url": "", "notes": "we have a meeting with them today at 4 pm", "strategy": "", "tier": "C", "hq": "Gurugram", "pain": "", "trust": true, "newlead": false, "pitch": "Pratyash Sharma on WhatsApp. Meeting was today per notes - follow up outcome.", "warning": "Meeting was scheduled. What was the outcome?", "status": "meeting_scheduled"}, {"brand": "COCA-COLA", "cat": "AERATED BEVERAGES", "name": "Sanket Ray", "desig": "President, India and Southwest Asia and Emerging Large Markets", "phone": "", "email": "", "url": "https://www.linkedin.com/in/sanket-ray-4063451/", "notes": "", "strategy": "", "tier": "A", "hq": "Gurugram", "pain": "Health backlash against aerated drinks growing.", "trust": false, "newlead": true, "pitch": "Sanket Ray is too senior (President of entire India business). Correct contact is Greishma Singh VP Marketing.", "warning": "CONFLICT: Sanket Ray in your file is too senior. Correct first contact is Greishma Singh VP Marketing who replaced Arnab Roy Sep 2024.", "status": "not_contacted"}, {"brand": "INDIGO AIRLINES", "cat": "AIRLINES - INDIAN", "name": "Deepti Sampat", "desig": "Vice President Marketing and Digital at IndiGo", "phone": "", "email": "", "url": "https://www.linkedin.com/in/deepti-sampat-45120a1/", "notes": "", "strategy": "", "tier": "A", "hq": "Gurugram", "pain": "SEVERE CRISIS: flights cancelled CEO resigned food quality scandals.", "trust": false, "newlead": true, "pitch": "Deepti Sampat VP Marketing from your file is more senior than my earlier contact. Use Deepti Sampat.", "warning": "Your contact Deepti Sampat is better than my earlier suggestion of Ruchika Gupta. Use Deepti.", "status": "not_contacted"}, {"brand": "JAGUAR", "cat": "FOUR WHEELER - SUPER LUXURY", "name": "Ankur kansal", "desig": "Brand Director", "phone": "+91 98195 93582", "email": "akansal1@jaguarlandrover.com", "url": "https://www.linkedin.com/in/ankur-kansal-9b34361/", "notes": "Have sent an email", "strategy": "Meeting route", "tier": "B", "hq": "Mumbai", "pain": "Pivoting entirely to EV - brand transformation risk.", "trust": false, "newlead": false, "pitch": "Consumer trust = anchor during EV transformation. Email sent per notes.", "warning": "Ankur Kansal confirmed correct.", "status": "contacted_no_response"}, {"brand": "AJIO", "cat": "ONLINE FASHION RETAILER", "name": "Arpan Biswas", "desig": "CMO", "phone": "have on whatsapp", "email": "", "url": "", "notes": "", "strategy": "", "tier": "A", "hq": "Mumbai", "pain": "E-commerce product quality trust concern.", "trust": false, "newlead": false, "pitch": "You already know Arpan Biswas CMO. Use existing relationship.", "warning": "Confirmed correct. You have him on WhatsApp.", "status": "not_contacted"}, {"brand": "DR.ORTHO", "cat": "PAIN RELIEF OIL - AYURVEDIC", "name": "Narendra Singh", "desig": "Digital Marketing & Growth Head", "phone": "+91 88474 21248", "email": "narendra.singh@divisa.in", "url": "https://www.linkedin.com/in/narendrasinghr/", "notes": "", "strategy": "has said after march", "tier": "B", "hq": "Kolkata", "pain": "", "trust": false, "newlead": false, "pitch": "Narendra Singh Digital Marketing Head. Notes say after March - follow up now.", "warning": "Notes say after March - that has passed. Follow up now.", "status": "waiting"}, {"brand": "HDFC BANK", "cat": "BANK - PRIVATE", "name": "Ravi Santhanam", "desig": "Group Head, CMO, Head-Direct to Consumer Business", "phone": "919322249413", "email": "+91 98200 18100", "url": "https://www.linkedin.com/in/ravi-santhanam-089b065/", "notes": "", "strategy": "", "tier": "A", "hq": "Mumbai", "pain": "GOVERNANCE CRISIS May 2026: CMO named in probe. CEO and CFO implicated.", "trust": true, "newlead": false, "pitch": "DO NOT APPROACH NOW. Wait 2-3 months. Trust narrative critical post-crisis.", "warning": "Ravi Santhanam is in active probe - approaching now would be tone-deaf.", "status": "not_contacted"}, {"brand": "ASIAN PAINTS", "cat": "PAINTS", "name": "Ronojoy Chakravarty", "desig": "General Manager - Head of Marketing, Asian Paints", "phone": "", "email": "", "url": "https://www.linkedin.com/in/ronojoy-chakravarty-25122714/", "notes": "", "strategy": "", "tier": "A", "hq": "Mumbai", "pain": "Profit -35% FY25. Berger and Indigo Paints eating share.", "trust": true, "newlead": false, "pitch": "Warranty campaign explicitly uses trust as anchor. Pain point = new entrant competition.", "warning": "Your contact Ronojoy Chakravarty GM Head of Marketing is correct - better than my earlier suggestion.", "status": "not_contacted"}, {"brand": "ACER", "cat": "PERSONAL COMPUTER", "name": "Sooraj Balakrishnan", "desig": "Head Of Marketing", "phone": "have on whatsapp", "email": "", "url": "https://www.linkedin.com/in/soorajbalakrishnan/", "notes": "", "strategy": "", "tier": "A", "hq": "Gurugram", "pain": "PC market competitive.", "trust": false, "newlead": false, "pitch": "Trust-heavy purchase. Indian recognition differentiates vs Dell HP Lenovo.", "warning": "Sooraj Balakrishnan Head of Marketing on WhatsApp from your file.", "status": "not_contacted"}, {"brand": "TP LINK", "cat": "ROUTERS", "name": "Savio Almedia", "desig": "Head of Marketing", "phone": "have on whatsapp", "email": "", "url": "", "notes": "have reached out throuh call but no response so I have sent him a message and asked for a meetin person, since we already had an online last time in MDB 25", "strategy": "", "tier": "C", "hq": "Mumbai", "pain": "Chinese brand perception.", "trust": false, "newlead": false, "pitch": "Savio Almeida Head of Marketing. Had meeting last time in MDB 25. Follow up.", "warning": "Previous meeting exists. Follow up.", "status": "contacted_no_response"}, {"brand": "PARACHUTE", "cat": "HAIR OIL", "name": "Ilma Aqeel", "desig": "Brand Manager- Parachute", "phone": "919654255974", "email": "ilma.aqeel@marico.com", "url": "https://www.linkedin.com/in/ilma-aqeel-951783146/", "notes": "", "strategy": "", "tier": "A", "hq": "Mumbai", "pain": "", "trust": false, "newlead": true, "pitch": "Ilma Aqeel is brand manager - good entry but cannot approve 10L alone. Route to Vikram Karwal CMO.", "warning": "Brand manager level - escalation to CMO Vikram Karwal needed for budget approval.", "status": "not_contacted"}, {"brand": "MARUTI SUZUKI SWIFT", "cat": "CAR - HATCHBACK", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "A", "hq": "Gurugram", "pain": "Hatchback under pressure from Tata Punch.", "trust": false, "newlead": false, "pitch": "No contact in your file. Confirmed contact: Partho Banerjee Senior Executive Officer Marketing and Sales Maruti Suzuki.", "warning": "No contact in file. Add Partho Banerjee.", "status": "not_contacted"}, {"brand": "HARPIC", "cat": "TOILET CLEANER", "name": "Abhijit Aswath", "desig": "Marketing Manager & Category Head Harpic", "phone": "", "email": "", "url": "https://www.linkedin.com/in/abhijit-aswath-18160845/", "notes": "", "strategy": "", "tier": "A", "hq": "Mumbai", "pain": "", "trust": false, "newlead": true, "pitch": "Abhijit Aswath is category head - good entry point. Gautam Rishi Marketing Director is escalation.", "warning": "Abhijit Aswath from your file is right first contact. Gautam Rishi (new Apr 2025) is escalation.", "status": "not_contacted"}, {"brand": "TROPICANA", "cat": "PACKAGED FRUIT JUICE", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "A", "hq": "Gurugram", "pain": "Category declining.", "trust": false, "newlead": false, "pitch": "Juice = health claim category. Consumer trust validation powerful when category under scrutiny.", "warning": "No contact in your file. CMO India Beverages PepsiCo is Tarun Bhagat.", "status": "not_contacted"}, {"brand": "VIVO", "cat": "MOBILE PHONES", "name": "Karun Arora", "desig": "General Manager & Head - Marketing Communications", "phone": "", "email": "", "url": "https://www.linkedin.com/in/karun-arora-23711425/", "notes": "", "strategy": "", "tier": "A", "hq": "Gurugram", "pain": "Chinese brand perception - periodic consumer backlash.", "trust": false, "newlead": false, "pitch": "Indian consumer recognition = counter-narrative to Chinese brand trust issue.", "warning": "Karun Arora GM Head Marketing Communications from your file is correct.", "status": "not_contacted"}, {"brand": "SKODA", "cat": "SUV MANUFACTURER - PREMIUM", "name": "Ashish Gupta", "desig": "Brand Director - Skoda India", "phone": "+91 98719 74123", "email": "+91 88796 79918", "url": "https://www.linkedin.com/in/ashish-g-7250b08/", "notes": "", "strategy": "Meeting route", "tier": "A", "hq": "Pune", "pain": "", "trust": false, "newlead": true, "pitch": "Two wins premium and SUV - one conversation. New Brand Director May 2025.", "warning": "Ashish Gupta Brand Director from your file is correct. InMail sent per notes.", "status": "not_contacted"}, {"brand": "NDTV", "cat": "ENGLISH NEWS", "name": "Gaurav Barjatiya", "desig": "Marketing Head - NDTV", "phone": "have on whatsapp", "email": "", "url": "https://www.linkedin.com/in/gbarjatya/", "notes": "had called him but no response", "strategy": "", "tier": "C", "hq": "New Delhi", "pain": "Editorial independence questions post-Adani.", "trust": true, "newlead": false, "pitch": "Gaurav Barjatiya on WhatsApp. Had called no response. One more attempt.", "warning": "No response to calls. Try WhatsApp message.", "status": "contacted_no_response"}, {"brand": "INDIA GATE", "cat": "PACKAGED RICE", "name": "Kunal Sharma", "desig": "Vice President - Heading Marketing", "phone": "have on whatsapp", "email": "", "url": "https://www.linkedin.com/in/sharmakunal/", "notes": "", "strategy": "", "tier": "A", "hq": "New Delhi", "pain": "", "trust": false, "newlead": true, "pitch": "Kunal Sharma VP Marketing confirmed. Elevated Aug 2025 - new in role. Two wins - bundle.", "warning": "Kunal Sharma from your file confirmed correct. New in VP role Aug 2025.", "status": "not_contacted"}, {"brand": "INDIA GATE BASMATI", "cat": "PACKAGED RICE - BRAND", "name": "Kunal Sharma", "desig": "Vice President - Heading Marketing", "phone": "have on whatsapp", "email": "", "url": "https://www.linkedin.com/in/sharmakunal/", "notes": "", "strategy": "", "tier": "A", "hq": "New Delhi", "pain": "", "trust": false, "newlead": true, "pitch": "Bundle with India Gate. One KRBL conversation with Kunal Sharma.", "warning": "Same contact as India Gate.", "status": "not_contacted"}, {"brand": "LAYS", "cat": "WAFERS", "name": "Aastha Bhasin", "desig": "Markering Director, Lay’s and Uncle Chipps", "phone": "", "email": "", "url": "https://www.linkedin.com/in/aastha-bhasin-5b470a8/", "notes": "", "strategy": "", "tier": "A", "hq": "Gurugram", "pain": "", "trust": false, "newlead": true, "pitch": "Aastha Bhasin Marketing Director Lays from your file is right level.", "warning": "Aastha Bhasin from your file is correct. Her CMO boss is Saakshi Verma Menon appointed Jul 2025.", "status": "not_contacted"}, {"brand": "NAVNEET", "cat": "EDUCATIONAL BOOKS", "name": "Nirav Gada", "desig": "Marketing head", "phone": "have on whatsapp", "email": "", "url": "", "notes": "have spoken with him it seems unlikely they will go ahead with this but he has asked to check if their other brands have come into the report, has asked me to mail", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": true, "newlead": false, "pitch": "Nirav Gada Marketing Head. Seems unlikely per notes but asked to check other brands and mail.", "warning": "Send the mail he asked for. Check if other Navneet brands are in report.", "status": "contacted_no_response"}, {"brand": "PLAYSTATION 5", "cat": "VIDEO GAME CONSOLES", "name": "Pankaj Sharma", "desig": "Marketing Initiatives @PlayStation India", "phone": "have on whatsapp", "email": "", "url": "https://www.linkedin.com/in/myslfps/", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "Nintendo Switch 2 competitive pressure.", "trust": false, "newlead": false, "pitch": "Pankaj Sharma on WhatsApp. Indian consumer recognition unusual in gaming - strong differentiator.", "warning": "", "status": "not_contacted"}, {"brand": "CITIBANK", "cat": "BANK - FOREIGN", "name": "Shweta Ramchandani", "desig": "Vice President and Head, External Communications", "phone": "919619105070", "email": "+91 22 3342 1886", "url": "https://www.linkedin.com/in/shweta-ramchandani-a5a4bb9/", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "Citi exited consumer banking - trust repositioning needed.", "trust": true, "newlead": false, "pitch": "Shweta Ramchandani is VP External Communications not marketing. May not be right person.", "warning": "CONFLICT: Shweta Ramchandani handles external comms not brand marketing. May need different contact.", "status": "not_contacted"}, {"brand": "RELIANCE JIOMART", "cat": "ONLINE GROCERY RETAILER", "name": "Lalatendu Panda", "desig": "Sr.VP & Business Head - JioMart ( Quick Commerce & E-commerce)", "phone": "+91 90829 63565", "email": "+91 99302 71470", "url": "https://www.linkedin.com/in/lalatendu-panda-455254a/", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "Food freshness and safety trust.", "trust": false, "newlead": false, "pitch": "Lalatendu Panda is Sr VP Business Head commerce focused. May not be right person for brand licensing.", "warning": "Commerce head not brand head. May need different contact.", "status": "not_contacted"}, {"brand": "BOMBAY DYEING", "cat": "BEDDING & LINEN", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "Legacy brand facing D2C linen competition.", "trust": true, "newlead": false, "pitch": "No contact in file. Need to find marketing head.", "warning": "No contact in file.", "status": "not_contacted"}, {"brand": "KOTAK MUTUAL FUND", "cat": "MUTUAL FUND", "name": "Pankaj Palan", "desig": "Marketing", "phone": "have on whatsapp", "email": "", "url": "https://www.linkedin.com/in/pankaj-palan-036a5956/?isSelfProfile=false", "notes": "", "strategy": "", "tier": "A", "hq": "Mumbai", "pain": "", "trust": true, "newlead": false, "pitch": "Their own LinkedIn bio: vision is to be most trustworthy company in India. Open with that exact line.", "warning": "Pankaj Palan in your file - verify his current designation is still senior enough.", "status": "not_contacted"}, {"brand": "ORGANIC HARVEST", "cat": "SUNSCREEN", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "B", "hq": "Gurugram", "pain": "Greenwashing scrutiny.", "trust": false, "newlead": false, "pitch": "No contact in file. Rahul Agarwal founder CEO is right approach.", "warning": "No contact in file - needs research.", "status": "not_contacted"}, {"brand": "SAMSUNG", "cat": "DIVERSIFIED", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "B", "hq": "Gurugram", "pain": "Chinese brand competition.", "trust": false, "newlead": false, "pitch": "No contact in file. Need Samsung India marketing head.", "warning": "No contact in file - needs research.", "status": "not_contacted"}, {"brand": "ONECARD", "cat": "AI CREDIT SCORE PLANNER", "name": "Manasi Jagdish", "desig": "Head - brand, content & PR", "phone": "+91 98207 02020", "email": "+91 98201 02020", "url": "https://www.linkedin.com/in/manasi-jagdish-67542841/", "notes": "", "strategy": "", "tier": "B", "hq": "Pune", "pain": "Newer brand trust gap vs banks.", "trust": false, "newlead": false, "pitch": "Manasi Jagdish Head Brand Content PR in file. Right level.", "warning": "", "status": "not_contacted"}, {"brand": "COLGATE", "cat": "TOOTHPASTE", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "A", "hq": "Mumbai", "pain": "", "trust": true, "newlead": false, "pitch": "Trust is a stated brand KPI. Ayan Guha (Director Marketing) is confirmed contact not yet in your file. Ad spend 819cr FY26.", "warning": "", "status": "not_contacted"}, {"brand": "COLGATE CIBACA", "cat": "TOOTHPASTE - BRAND", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "A", "hq": "Mumbai", "pain": "", "trust": true, "newlead": false, "pitch": "Bundle with Colgate. Same contact Ayan Guha handles all Colgate India brands.", "warning": "", "status": "not_contacted"}, {"brand": "STARBUCKS", "cat": "CAFÉ", "name": "Mitali Maheshwari", "desig": "Head- Product & Marketing Starbucks India", "phone": "", "email": "", "url": "https://www.linkedin.com/in/mitali-maheshwari-6b4053106/", "notes": "", "strategy": "", "tier": "A", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Mitali Maheshwari Head Product Marketing from your file is right. CEO too senior.", "warning": "Mitali Maheshwari confirmed correct. Not the CEO.", "status": "not_contacted"}, {"brand": "RELIANCE JIO", "cat": "MOBILE SERVICE PROVIDER", "name": "Rohan Khanna", "desig": "Vice President & National Head - Product/Pricing & Marketing Communication", "phone": "", "email": "", "url": "https://www.linkedin.com/in/rohan-khanna-0417967/", "notes": "", "strategy": "", "tier": "B", "hq": "Navi Mumbai", "pain": "Network quality complaints.", "trust": false, "newlead": false, "pitch": "Rohan Khanna VP National Head confirmed in file.", "warning": "", "status": "not_contacted"}, {"brand": "RELIANCE JIO", "cat": "SERVICES - DIVERSIFIED", "name": "Rohan Khanna", "desig": "Vice President & National Head - Product/Pricing & Marketing Communication", "phone": "", "email": "", "url": "https://www.linkedin.com/in/rohan-khanna-0417967/", "notes": "", "strategy": "", "tier": "B", "hq": "Navi Mumbai", "pain": "Network quality complaints.", "trust": false, "newlead": false, "pitch": "Rohan Khanna VP National Head confirmed in file.", "warning": "", "status": "not_contacted"}, {"brand": "TOYOTA INNOVA", "cat": "MPV BRAND - PREMIUM", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "A", "hq": "Bengaluru", "pain": "", "trust": true, "newlead": false, "pitch": "Innova HyCross 2L milestone Apr 2026. Bundle with Fortuner.", "warning": "No contact in your file. Same contact: Sabari Manohar.", "status": "not_contacted"}, {"brand": "TOYOTA FORTUNER", "cat": "SUV BRAND - PREMIUM", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "A", "hq": "Bengaluru", "pain": "", "trust": true, "newlead": false, "pitch": "His own press quotes say continued trust in Toyota quality. Bundle Fortuner and Innova.", "warning": "No contact in your file. Confirmed: Sabari Manohar EVP Sales Service Toyota Kirloskar.", "status": "not_contacted"}, {"brand": "FASTRACK", "cat": "EYEWEAR", "name": "Danny Jacob", "desig": "Head of Marketing- Fastrack", "phone": "", "email": "", "url": "https://www.linkedin.com/in/dannyjacob85/", "notes": "", "strategy": "", "tier": "A", "hq": "Bengaluru", "pain": "", "trust": false, "newlead": false, "pitch": "Danny Jacob Head of Marketing from your file is right. Suparna Mitra CEO is too senior.", "warning": "Danny Jacob confirmed correct contact.", "status": "not_contacted"}, {"brand": "DECATHLON", "cat": "ACTIVEWEAR", "name": "Pearl D'Souza", "desig": "Head of Marketing", "phone": "", "email": "", "url": "https://www.linkedin.com/in/pearl-sharrell/", "notes": "", "strategy": "", "tier": "A", "hq": "Bengaluru", "pain": "", "trust": false, "newlead": false, "pitch": "Two wins Activewear and Sports Equipment. Pearl D'Souza Head of Marketing from your file. Bundle both.", "warning": "Pearl D'Souza confirmed correct for both categories.", "status": "not_contacted"}, {"brand": "KFC", "cat": "QSR", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "A", "hq": "Gurugram", "pain": "", "trust": false, "newlead": false, "pitch": "India recognition differentiates from McDonald's locally.", "warning": "No contact in your file. Confirmed CMO: Moksh Chopra KFC India.", "status": "not_contacted"}, {"brand": "DECATHLON", "cat": "SPORTS EQUIPMENT", "name": "Pearl D'Souza", "desig": "Head of Marketing", "phone": "", "email": "", "url": "https://www.linkedin.com/in/pearl-sharrell/", "notes": "", "strategy": "", "tier": "A", "hq": "Bengaluru", "pain": "", "trust": false, "newlead": false, "pitch": "Two wins Activewear and Sports Equipment. Pearl D'Souza Head of Marketing from your file. Bundle both.", "warning": "Pearl D'Souza confirmed correct for both categories.", "status": "not_contacted"}, {"brand": "GOOGLE PAY", "cat": "DIGITAL PAYMENTS", "name": "Arijit Sen", "desig": "Head of Marketing for Google Pay (India)", "phone": "+91 98711 50290", "email": "arijits@google.com", "url": "https://www.linkedin.com/in/arijit-sen-a370197/", "notes": "have sent a messae", "strategy": "", "tier": "C", "hq": "Gurugram", "pain": "", "trust": true, "newlead": false, "pitch": "Arijit Sen Head of Marketing. Message sent per notes. Trust relevant in payments.", "warning": "Message already sent. Follow up.", "status": "contacted_no_response"}, {"brand": "STAR HEALTH", "cat": "HEALTH INSURANCE - PRIVATE", "name": "R Mohan", "desig": "Sr. Manager - D2C", "phone": "have on whatsapp", "email": "", "url": "https://www.linkedin.com/in/mohan-r-19427121b/", "notes": "Conversation has been shifted to be done with Kotha Kartheek, head of department, have reached out but he was in a meeting", "strategy": "", "tier": "C", "hq": "Unknown", "pain": "", "trust": false, "newlead": false, "pitch": "Review needed.", "warning": "", "status": "contacted_no_response"}, {"brand": "FEVICOL", "cat": "ADHESIVES", "name": "Sandeep Tanwani", "desig": "Chief Marketing Officer", "phone": "+91 90043 56279", "email": "sandeep.tanwani@pidilite.com", "url": "https://www.linkedin.com/in/sandeep-tanwani-771797/", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": true, "newlead": false, "pitch": "Sandeep Tanwani CMO with phone and email. Meta-pitch: brand built on trust gets consumer trust recognition.", "warning": "Strong contact. CMO level with full details.", "status": "not_contacted"}, {"brand": "MAC", "cat": "COSMETICS - PREMIUM", "name": "Sanjana Dedhia", "desig": "Consumer Marketing Executive", "phone": "+91 64685 87907", "email": "sdedhia@estee.com", "url": "https://www.linkedin.com/in/sanjdedhia/", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Sanjana Dedhia Consumer Marketing Executive. Two MAC wins - one ELC India conversation.", "warning": "Executive level - may need escalation for 10L budget.", "status": "not_contacted"}, {"brand": "MAC", "cat": "LIPSTICK - PREMIUM", "name": "Sanjana Dedhia", "desig": "Consumer Marketing Executive", "phone": "+91 64685 87907", "email": "sdedhia@estee.com", "url": "https://www.linkedin.com/in/sanjdedhia/", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Sanjana Dedhia Consumer Marketing Executive. Two MAC wins - one ELC India conversation.", "warning": "Executive level - may need escalation for 10L budget.", "status": "not_contacted"}, {"brand": "NYCIL", "cat": "PRICKLY HEAT POWDER", "name": "Rohan Shah", "desig": "Brand Manager - Nycil", "phone": "1834973512696", "email": "rohan.shah@zyduswellness.com", "url": "https://www.linkedin.com/in/rohan-shah-45588b59/", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Rohan Shah Brand Manager - junior. May need sign-off above for 10L approval.", "warning": "Brand manager level - may need escalation.", "status": "not_contacted"}, {"brand": "ARUN ICECREAMS", "cat": "ICE CREAM/FROZEN DESSERT", "name": "Rashmi Ravindran", "desig": "Marketing Manager", "phone": "+91 72000 08199", "email": "+91 73582 48111", "url": "https://www.linkedin.com/in/rashmiravindrant/", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Rashmi Ravindran Marketing Manager in file. Strong South India brand.", "warning": "", "status": "not_contacted"}, {"brand": "HINDUSTAN PETROLEUM", "cat": "FUEL PRODUCTS", "name": "Check with Pitabas from HP", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Note says check with Pitabas from HP. Confirm that contact.", "warning": "Need to verify Pitabas contact.", "status": "not_contacted"}, {"brand": "MANISH MALHOTRA", "cat": "DESIGNERWEAR - LUXURY", "name": "Sahil Ramchandani", "desig": "Head of marketing", "phone": "919096969213", "email": "", "url": "https://www.linkedin.com/in/sahil-ramchandani-89491529/", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Sahil Ramchandani Head of Marketing. Mumbai-based - easy certificate delivery.", "warning": "", "status": "not_contacted"}, {"brand": "VISA", "cat": "CREDIT CARD NETWORK", "name": "Gaurav Ramdev", "desig": "CMO / Head of Marketing  - India and South Asia", "phone": "+91 82187 70175", "email": "+91 99008 39270", "url": "https://www.linkedin.com/in/gauravramdev/", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": true, "newlead": false, "pitch": "Gaurav Ramdev CMO confirmed in file. Right contact.", "warning": "Confirmed correct.", "status": "not_contacted"}, {"brand": "DURACELL", "cat": "CONSUMER BATTERIES", "name": "Sunil Gadgil", "desig": "Vice President,General Manager India", "phone": "have on whatsapp", "email": "", "url": "https://www.linkedin.com/in/sunil-gadgil-6677015/", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": true, "newlead": false, "pitch": "Sunil Gadgil VP GM India on WhatsApp. Reliability is Duracell - recognition aligns perfectly.", "warning": "Strong contact at right level.", "status": "not_contacted"}, {"brand": "DIOR", "cat": "DEO/PERFUME - LUXURY", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "No contact in file. LVMH India marketing head needed.", "warning": "No contact in file.", "status": "not_contacted"}, {"brand": "LIPTON GREEN LABEL", "cat": "TEA - BRAND", "name": "Nitin Raina", "desig": "Brand Development Marketing- LIPTON", "phone": "", "email": "", "url": "https://www.linkedin.com/in/nitin-raina-2b20b462/", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Nitin Raina Brand Development Marketing. HUL brand may need escalation for budget approval.", "warning": "HUL brand - budget approval may sit above brand manager level.", "status": "not_contacted"}, {"brand": "GODREJ", "cat": "LOCKS", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "No contact in file. Locks category - trust relevant.", "warning": "No contact in file.", "status": "not_contacted"}, {"brand": "ABP MAJHA", "cat": "MARATHI NEWS", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": true, "newlead": false, "pitch": "No contact in file. ABP Network marketing head needed.", "warning": "No contact in file.", "status": "not_contacted"}, {"brand": "RELIANCE DIGITAL", "cat": "ELECTRONICS", "name": "Manoj Jain", "desig": "Sr VP & Head: Omni Channel Marketing", "phone": "", "email": "", "url": "https://www.linkedin.com/in/manojjain16/", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Manoj Jain Sr VP Omni Channel Marketing. Good contact.", "warning": "", "status": "not_contacted"}, {"brand": "ZUDIO", "cat": "VALUE FASHION", "name": "Marjolein Van Brandwijk", "desig": "Head Zudio at Trent Ltd", "phone": "", "email": "", "url": "https://www.linkedin.com/in/marjoleinvanbrandwijk/", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Marjolein Van Brandwijk Head Zudio confirmed in file.", "warning": "", "status": "not_contacted"}, {"brand": "W", "cat": "FUSIONWEAR - WOMEN", "name": "Gautam Dhingra", "desig": "head of marketing", "phone": "have on whatsapp", "email": "", "url": "", "notes": "", "strategy": "", "tier": "B", "hq": "Gurugram", "pain": "", "trust": false, "newlead": false, "pitch": "Gautam Dhingra Head of Marketing on WhatsApp.", "warning": "", "status": "not_contacted"}, {"brand": "NALLI", "cat": "SAREES - PREMIUM", "name": "Lavanya Nalli", "desig": "Director at Nalli", "phone": "+91 98840 27584", "email": "+91 98410 27584", "url": "https://www.linkedin.com/in/lavanyanalli/", "notes": "", "strategy": "", "tier": "B", "hq": "Chennai", "pain": "", "trust": true, "newlead": false, "pitch": "Lavanya Nalli Director. Heritage trust brand. TRA recognition = modern consumer validation.", "warning": "", "status": "not_contacted"}, {"brand": "SANTOOR", "cat": "HANDWASH", "name": "check with Siddharth from wipro", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "B", "hq": "Bengaluru", "pain": "", "trust": false, "newlead": false, "pitch": "Your note says check with Siddharth from Wipro. Confirm that contact first.", "warning": "Contact not confirmed yet. Check with Siddharth.", "status": "not_contacted"}, {"brand": "RAJDHANI", "cat": "CHICKPEA FLOUR", "name": "Chetan Jain", "desig": "Director", "phone": "have on whatsapp", "email": "", "url": "", "notes": "", "strategy": "", "tier": "B", "hq": "Bareilly", "pain": "", "trust": false, "newlead": false, "pitch": "Chetan Jain Director on WhatsApp.", "warning": "", "status": "not_contacted"}, {"brand": "GLUCON D", "cat": "POWDERED DRINK", "name": "Roshni Rachel John", "desig": "Brand Manager - Glucon D", "phone": "1838929384755", "email": "roshni.r.john@zyduswellness.com", "url": "https://www.linkedin.com/in/roshniracheljohn/", "notes": "", "strategy": "", "tier": "B", "hq": "Ahmedabad", "pain": "", "trust": false, "newlead": false, "pitch": "Roshni Rachel John Brand Manager - junior. May need escalation for 10L approval.", "warning": "Brand manager level - may need escalation.", "status": "not_contacted"}, {"brand": "KOHLER", "cat": "BATH FIXTURES - LUXURY", "name": "Jacob Kuriakose", "desig": "Director, Head of Marketing - Kohler South Asia", "phone": "have on whatsapp", "email": "", "url": "https://www.linkedin.com/in/kuriakose-jacob/", "notes": "", "strategy": "", "tier": "B", "hq": "Gurugram", "pain": "", "trust": false, "newlead": false, "pitch": "Jacob Kuriakose Director Head of Marketing on WhatsApp.", "warning": "", "status": "not_contacted"}, {"brand": "ORIENTAL INSURANCE", "cat": "GENERAL INSURANCE - PSU", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "B", "hq": "New Delhi", "pain": "", "trust": false, "newlead": false, "pitch": "No contact in file. PSU - approach corporate office New Delhi.", "warning": "No contact in file.", "status": "not_contacted"}, {"brand": "BOROPLUS", "cat": "ANTISEPTIC CREAM - AYURVEDIC", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "B", "hq": "Kolkata", "pain": "", "trust": true, "newlead": false, "pitch": "No contact in file. Emami marketing head needed. Bundle with Dr.Ortho.", "warning": "No contact in file - needs research.", "status": "not_contacted"}, {"brand": "MOTHER'S RECIPE", "cat": "PICKLES", "name": "Sonali J", "desig": "marketing head", "phone": "check with team for background", "email": "", "url": "https://www.linkedin.com/in/sonali-j-6401294b/", "notes": "", "strategy": "", "tier": "B", "hq": "Pune", "pain": "", "trust": false, "newlead": false, "pitch": "Sonali J marketing head in file. Check with team for background per notes.", "warning": "Check with team before reaching out.", "status": "not_contacted"}, {"brand": "WHATSAPP", "cat": "INSTANT MESSAGING SERVICE", "name": "Ravi Garg", "desig": "Country Head - WhatsApp for Business", "phone": "+91 99534 55955", "email": "ravi.garg@whatsapp.com", "url": "https://www.linkedin.com/in/ravi-garg-6b59505/", "notes": "", "strategy": "Meeting route", "tier": "C", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Ravi Garg Country Head WhatsApp for Business.", "warning": "", "status": "not_contacted"}, {"brand": "YOUTUBE", "cat": "VIDEO-SHARING", "name": "Shubha Pai", "desig": "Head of YouTube Sales & Solutions", "phone": "1839766546596", "email": "shubhapai@google.com", "url": "https://www.linkedin.com/in/paishubha", "notes": "", "strategy": "Meeting route", "tier": "C", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Shubha Pai Head YouTube Sales. Global product.", "warning": "", "status": "not_contacted"}, {"brand": "HPGAS", "cat": "LPG", "name": "Pitabas Sarangi", "desig": "Marketing", "phone": "have on whatsapp", "email": "", "url": "", "notes": "", "strategy": "", "tier": "C", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Pitabas Sarangi on WhatsApp. Utility brand.", "warning": "", "status": "not_contacted"}, {"brand": "TESLA", "cat": "ELECTRIC CAR", "name": "Sharad Agarwal", "desig": "Country head India", "phone": "918879631259", "email": "sagarwal@tesla.com", "url": "https://www.linkedin.com/in/sharad-agarwal-13013716/", "notes": "", "strategy": "", "tier": "C", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Sharad Agarwal Country Head India. Brand policy may exclude third-party recognition.", "warning": "", "status": "not_contacted"}, {"brand": "FACEBOOK", "cat": "SOCIAL MEDIA", "name": "Arun Srinivas", "desig": "Managing Director & Country Head, India", "phone": "+91 98203 26623", "email": "+91 99207 80085", "url": "https://www.linkedin.com/in/arun-srinivas-6064721/", "notes": "", "strategy": "", "tier": "C", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Arun Srinivas MD Country Head - very senior. Global product.", "warning": "Too senior for first contact.", "status": "not_contacted"}, {"brand": "BAYER", "cat": "AGROCHEMICALS", "name": "Kedar Mangalwedhekar", "desig": "Marketing Head", "phone": "", "email": "", "url": "https://www.linkedin.com/in/kedar-mangalwedhekar-06494a17/", "notes": "", "strategy": "", "tier": "C", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Kedar Mangalwedhekar Marketing Head in file. B2B agrochemical.", "warning": "", "status": "not_contacted"}, {"brand": "RELIANCE", "cat": "DIVERSIFIED", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "C", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "No consumer brand marketing. Skip.", "warning": "", "status": "not_contacted"}, {"brand": "DELTA", "cat": "STATIONERY", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "C", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "No contact in file.", "warning": "", "status": "not_contacted"}, {"brand": "APPLE", "cat": "PERSONAL TECHNOLOGY", "name": "Shagun Seda", "desig": "Head of Marketing Communications", "phone": "", "email": "", "url": "https://www.linkedin.com/in/shagunseda/", "notes": "", "strategy": "", "tier": "C", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Shagun Seda Head Marketing Communications. Apple policy likely excludes third-party recognition.", "warning": "", "status": "not_contacted"}, {"brand": "LUFTHANSA", "cat": "AIRLINES - FOREIGN", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "C", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "No contact in file. Global airline.", "warning": "", "status": "not_contacted"}, {"brand": "VSL", "cat": "EPC CONTRACTORS", "name": "Kailash Basita", "desig": "Managing Director", "phone": "919677129193", "email": "kailash.basita@vsl.com", "url": "https://www.linkedin.com/in/kailash-basita-25a34557/", "notes": "", "strategy": "Meeting route", "tier": "C", "hq": "Unknown", "pain": "", "trust": false, "newlead": false, "pitch": "Kailash Basita MD in file. B2B EPC.", "warning": "", "status": "not_contacted"}, {"brand": "GOOGLE PLAY STORE", "cat": "APP STORE", "name": "Aditya Swamy", "desig": "Managing Director - Google Play", "phone": "+91 98336 33212", "email": "adityaswamy@google.com", "url": "https://www.linkedin.com/in/aditya-swamy-bb355921/", "notes": "", "strategy": "Meeting route", "tier": "C", "hq": "Gurugram", "pain": "", "trust": false, "newlead": false, "pitch": "Aditya Swamy MD Google Play. Global product - single outreach.", "warning": "", "status": "not_contacted"}, {"brand": "GOOGLE", "cat": "INTERNET SEARCH", "name": "Shekar Khosla", "desig": "Vice President Marketing", "phone": "+91 98202 57763", "email": "shekar@google.com", "url": "https://www.linkedin.com/in/shekarkhosla/", "notes": "", "strategy": "Meeting route", "tier": "C", "hq": "Gurugram", "pain": "", "trust": false, "newlead": false, "pitch": "Shekar Khosla VP Marketing. Global brand.", "warning": "", "status": "not_contacted"}, {"brand": "WIPRO", "cat": "SEATING SOLUTIONS", "name": "Siddhart Bhandari", "desig": "Head Of Marketing", "phone": "have on whatsapp", "email": "", "url": "", "notes": "", "strategy": "", "tier": "C", "hq": "Bengaluru", "pain": "", "trust": false, "newlead": false, "pitch": "B2B primarily. Siddharth Bhandari on WhatsApp.", "warning": "", "status": "not_contacted"}, {"brand": "ESAB INDIA", "cat": "WELDING & CUTTING EQUIPMENT", "name": "J V Koteswara Rao", "desig": "Head Marketing - Equipment & Cutting", "phone": "+91 98409 44692", "email": "j_rao@esab.co.in", "url": "https://www.linkedin.com/in/j-v-koteswara-rao-b4790920/", "notes": "", "strategy": "", "tier": "C", "hq": "Chennai", "pain": "", "trust": false, "newlead": false, "pitch": "B2B industrial. Single outreach only.", "warning": "", "status": "not_contacted"}, {"brand": "GOOGLE NEWS", "cat": "ONLINE NEWS AGGREGATOR", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "C", "hq": "Gurugram", "pain": "", "trust": false, "newlead": false, "pitch": "Global product. Skip.", "warning": "", "status": "not_contacted"}, {"brand": "ONGC", "cat": "OIL & GAS - EXPLORATION AND REFINING", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "C", "hq": "New Delhi", "pain": "", "trust": false, "newlead": false, "pitch": "PSU upstream. Skip.", "warning": "", "status": "not_contacted"}, {"brand": "MERO", "cat": "CONSTRUCTION SOLUTIONS", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "C", "hq": "Unknown", "pain": "", "trust": false, "newlead": false, "pitch": "B2B construction. Skip.", "warning": "", "status": "not_contacted"}, {"brand": "LAVA", "cat": "MOBILE PHONES - INDIAN", "name": "Puravansh Maitreya", "desig": "Head of Marketing", "phone": "", "email": "", "url": "https://www.linkedin.com/in/puravansh-maitreya-69067014/", "notes": "", "strategy": "", "tier": "C", "hq": "Noida", "pain": "", "trust": false, "newlead": false, "pitch": "Puravansh Maitreya Head of Marketing. Made in India trust angle.", "warning": "", "status": "not_contacted"}, {"brand": "HEALTHCARE PHARMACEUTICALS", "cat": "PHARMACEUTICALS - FOREIGN", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "C", "hq": "Unknown", "pain": "", "trust": false, "newlead": false, "pitch": "B2B pharma. Skip.", "warning": "", "status": "not_contacted"}, {"brand": "WALMART", "cat": "HYPERMARKET - FOREIGN", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "C", "hq": "Gurugram", "pain": "", "trust": false, "newlead": false, "pitch": "No consumer retail in India. Skip.", "warning": "", "status": "not_contacted"}, {"brand": "MICROSOFT", "cat": "SOFTWARE PRODUCTS", "name": "Amrita Thapar", "desig": "Regional Marketing Director", "phone": "", "email": "", "url": "https://www.linkedin.com/in/amritathapar/", "notes": "", "strategy": "", "tier": "C", "hq": "Gurugram", "pain": "", "trust": false, "newlead": false, "pitch": "Amrita Thapar Regional Marketing Director. B2B primarily.", "warning": "", "status": "not_contacted"}, {"brand": "DHL", "cat": "EXPRESS SERVICES - FOREIGN", "name": "Jashna Bhalla Motwani", "desig": "Head of Marketing Communications", "phone": "have on whatsapp", "email": "", "url": "https://www.linkedin.com/in/jashnabhalla/", "notes": "No they wont be intrested", "strategy": "", "tier": "C", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Your notes say not interested. CLOSED.", "warning": "CLOSED per your notes.", "status": "closed"}, {"brand": "SUN UMBRELLAS", "cat": "UMBRELLAS", "name": "Rupal Bapna", "desig": "VP", "phone": "have on whatsapp", "email": "", "url": "", "notes": "no they wont be paying anything", "strategy": "", "tier": "C", "hq": "Unknown", "pain": "", "trust": false, "newlead": false, "pitch": "Your notes say they wont be paying. CLOSED.", "warning": "CLOSED per your notes.", "status": "closed"}];
+
+const ST={};
+RAW.forEach(d=>{ST[d.brand+'|'+d.cat]=d.status||'not_contacted';});
+
+let AF='all';
+
+function sf(f,btn){
+  AF=f;
+  document.querySelectorAll('.fb').forEach(b=>{
+    b.classList.remove('on');
+    ['x0','xA','xB','xC','xP','xM','xW','xN','xU','xG'].forEach(c=>b.classList.remove(c));
+  });
+  const cm={all:'x0',A:'xA',B:'xB',C:'xC',pain:'xP',meet:'xM',warm:'xW',new:'xN',mum:'xU',gap:'xG'};
+  btn.classList.add('on',cm[f]||'x0');
+  render();
+}
+
+function gap(d){
+  const n=(d.name||'').trim().toLowerCase();
+  return !n||n.startsWith('check with');
+}
+
+function toggleM(k){
+  const esc=k.replace(/'/g,"\'");
+  document.querySelectorAll('.smenu').forEach(m=>{if(m.dataset.key!==k)m.classList.remove('open');});
+  const m=document.querySelector(`.smenu[data-key='${esc}']`);
+  if(m)m.classList.toggle('open');
+}
+
+function setST(k,v){
+  ST[k]=v;
+  document.querySelectorAll('.smenu').forEach(m=>m.classList.remove('open'));
+  render();
+}
+
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.swrap'))document.querySelectorAll('.smenu').forEach(m=>m.classList.remove('open'));
+});
+
+function render(){
+  const q=document.getElementById('srch').value.toLowerCase();
+  const grid=document.getElementById('grid');
+  let html='',shown=0,cA=0,cB=0,cC=0,cP=0,cM=0;
+
+  RAW.forEach(d=>{
+    const k=d.brand+'|'+d.cat;
+    const s=ST[k]||'not_contacted';
+    if(d.tier==='A')cA++;else if(d.tier==='B')cB++;else cC++;
+    if(d.pain)cP++;
+    if(s==='meeting_scheduled')cM++;
+  });
+  document.getElementById('sa').textContent=cA;
+  document.getElementById('sb').textContent=cB;
+  document.getElementById('sc').textContent=cC;
+  document.getElementById('sp').textContent=cP;
+  document.getElementById('sm').textContent=cM;
+
+  RAW.forEach(d=>{
+    const k=d.brand+'|'+d.cat;
+    const s=ST[k]||'not_contacted';
+    if(AF==='A'&&d.tier!=='A')return;
+    if(AF==='B'&&d.tier!=='B')return;
+    if(AF==='C'&&d.tier!=='C')return;
+    if(AF==='pain'&&!d.pain)return;
+    if(AF==='meet'&&s!=='meeting_scheduled')return;
+    if(AF==='warm'&&s!=='warm')return;
+    if(AF==='new'&&!d.newlead)return;
+    if(AF==='mum'&&d.hq!=='Mumbai')return;
+    if(AF==='gap'&&!gap(d))return;
+    if(q){
+      const hay=[d.brand,d.cat,d.name,d.hq,d.desig,d.pitch,d.notes,d.pain].join(' ').toLowerCase();
+      if(!hay.includes(q))return;
+    }
+    shown++;
+
+    const kE=k.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+    const sLabel=SL[s]||s;
+    const sDot=SC[s]||'#9ca3af';
+
+    const statusHtml=`
+      <div class="swrap">
+        <div class="sbadge s-${s}" onclick="toggleM('${kE}')">
+          <span class="sdot"></span>${sLabel} ▾
+        </div>
+        <div class="smenu" data-key="${kE}">
+          ${Object.entries(SL).map(([v,l])=>`
+            <div class="sitem" onclick="setST('${kE}','${v}')">
+              <span class="sdot2" style="background:${SC[v]}"></span>${l}
+            </div>`).join('')}
+        </div>
+      </div>`;
+
+    const painHtml=d.pain?`
+      <div class="pain">
+        <span class="pain-icon">🔴</span><span>${d.pain}</span>
+      </div>`:'';
+
+    let contactHtml='';
+    if(gap(d)){
+      contactHtml=`<div class="nocon">⚠ No confirmed contact — research needed before outreach</div>`;
+    } else {
+      const hasWa=(d.phone||'').toLowerCase().includes('whatsapp');
+      const hasPhone=d.phone&&!hasWa&&d.phone.trim();
+      const hasEmail=d.email&&d.email.includes('@');
+      const hasUrl=d.url&&d.url.startsWith('http');
+      let pills='';
+      if(hasUrl)pills+=`<a class="pill li" href="${d.url}" target="_blank">LinkedIn ↗</a>`;
+      if(hasWa)pills+=`<span class="pill wa">✓ WhatsApp</span>`;
+      if(hasPhone)pills+=`<span class="pill">${d.phone}</span>`;
+      if(hasEmail)pills+=`<span class="pill em">${d.email}</span>`;
+      contactHtml=`
+        <div>
+          <div class="cname">${d.name}</div>
+          <div class="ctitle">${d.desig}</div>
+          ${pills?`<div class="cpills">${pills}</div>`:''}
+        </div>`;
+    }
+
+    let tags='';
+    if(d.trust)tags+=`<span class="tag tr">Trust language</span>`;
+    if(d.newlead)tags+=`<span class="tag nl">New leader</span>`;
+    if(gap(d))tags+=`<span class="tag gp">Contact needed</span>`;
+    if(d.warning)tags+=`<span class="tag wn">⚠ Check note</span>`;
+
+    const notesHtml=(d.notes&&d.notes.trim()&&d.notes.toLowerCase()!=='none')?`
+      <div class="nblock">
+        <div class="nlabel">Last note</div>${d.notes}
+      </div>`:'';
+
+    const warnHtml=d.warning?`<div class="wblock">⚠ ${d.warning}</div>`:'';
+
+    const pitchHtml=d.pitch?`
+      <div class="pblock">
+        <div class="plabel">Pitch angle</div>${d.pitch}
+      </div>`:'';
+
+    const stratHtml=d.strategy?`<span class="sbadge2">${d.strategy}</span>`:`<span></span>`;
+
+    html+=`
+    <div class="card">
+      <div class="strip ${d.tier}"></div>
+      <div class="card-head">
+        <div class="tbox ${d.tier}">${d.tier}</div>
+        <div class="binfo">
+          <div class="bname">${d.brand}</div>
+          <div class="bcat">${d.cat}</div>
+        </div>
+        <div class="hqtag">${d.hq}</div>
+      </div>
+      <div class="srow">${statusHtml}</div>
+      ${painHtml}
+      <div class="cbody">
+        ${contactHtml}
+        ${tags?`<div class="tags">${tags}</div>`:''}
+        ${notesHtml}
+        ${warnHtml}
+        ${pitchHtml}
+      </div>
+      <div class="cfoot">
+        ${stratHtml}
+        <span style="font-size:9.5px;color:var(--faint)">${d.hq}</span>
+      </div>
+    </div>`;
+  });
+
+  grid.innerHTML=html||`<div class="empty">No brands match the current filter.</div>`;
+  document.getElementById('cb').textContent=`Showing ${shown} of ${RAW.length} brands`;
+}
+
+render();
+</script>
+</body>
+</html>
