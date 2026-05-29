@@ -383,7 +383,7 @@ textarea.field-input{resize:vertical;min-height:70px}
 
 <script>
 const SHEET_ID = '151fIRxl25h9Tam5vFwJGfejlc-AogN4rD3tnFkP3Oyo';
-const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Sheet1`;
+const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR5tMCkn4uVsNR6wNQXSY0X-fMMbjL8E0rkEoGqGLnouG7PMk8oq8cpIQSDoo3dVEKk45L0NTvWDjR5/pub?output=csv&gid=0';
 
 const SL={
   not_contacted:'Not contacted',contacted_no_response:'Contacted — no response',
@@ -460,7 +460,7 @@ function loadData() {
   btn.classList.add('spinning');
   icon.textContent = '↻';
 
-  fetch(SHEET_URL + '&t=' + Date.now())
+  fetch(SHEET_URL + '&t=' + Date.now(), {mode:'cors'})
     .then(r => r.text())
     .then(text => {
       const rows = parseCSV(text);
