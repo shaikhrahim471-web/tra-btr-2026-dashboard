@@ -241,6 +241,39 @@ textarea.field-input{resize:vertical;min-height:70px}
 .sbadge2{font-size:9.5px;font-weight:500;padding:2px 8px;border-radius:7px;background:var(--card);border:1px solid var(--border);color:var(--muted)}
 .empty{grid-column:1/-1;text-align:center;padding:60px;color:var(--faint);font-size:14px}
 .error-msg{grid-column:1/-1;text-align:center;padding:40px;color:#991b1b;font-size:13px;background:#fef2f2;border-radius:8px;margin:20px}
+
+/* FETCH LATEST BUTTON */
+.fetch-btn{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:9.5px;font-weight:500;padding:2px 8px;border-radius:8px;
+  border:1px solid var(--border);background:var(--bg);color:var(--muted);
+  cursor:pointer;transition:all 0.15s;white-space:nowrap;font-family:'Inter',sans-serif;
+}
+.fetch-btn:hover{border-color:#1c1a17;color:#1c1a17;background:#fff}
+.fetch-btn.loading{border-color:#f59e0b;color:#92400e;background:#fffbeb;cursor:wait}
+.fetch-btn.done{border-color:#10b981;color:#065f46;background:#d1fae5}
+.fetch-icon{font-size:10px;display:inline-block;transition:transform 0.3s}
+.fetch-btn.loading .fetch-icon{animation:spin 0.8s linear infinite}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/* NEWS TIMELINE */
+.news-timeline{
+  font-size:10.5px;padding:7px 10px;border-radius:6px;
+  background:#f8f7f4;border-left:3px solid #e4e0d8;
+  line-height:1.5;
+}
+.news-label{
+  font-size:9px;font-weight:600;text-transform:uppercase;
+  letter-spacing:0.5px;color:var(--faint);margin-bottom:4px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.news-item{
+  padding:3px 0;border-bottom:0.5px solid var(--border);
+  color:var(--muted);
+}
+.news-item:last-child{border-bottom:none}
+.news-date{font-size:9.5px;font-weight:500;color:var(--faint);margin-right:5px;white-space:nowrap}
+.news-crisis{color:#7f1d1d;font-weight:500}
 </style>
 </head>
 <body>
@@ -380,6 +413,7 @@ textarea.field-input{resize:vertical;min-height:70px}
 <script>
 const SHEET_ID = '151fIRxl25h9Tam5vFwJGfejlc-AogN4rD3tnFkP3Oyo';
 const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR5tMCkn4uVsNR6wNQXSY0X-fMMbjL8E0rkEoGqGLnouG7PMk8oq8cpIQSDoo3dVEKk45L0NTvWDjR5/pub?output=csv&gid=0';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxD4SHG23iS8Gw5mOmUzM65z0RPAFq6M3mgp4_xu-nINY6gQYRCb3A0NwbCG5fnrCg6dw/exec';
 
 const SL={
   not_contacted:'Not contacted',contacted_no_response:'Contacted — no response',
@@ -446,6 +480,8 @@ function csvToObjects(rows) {
       strategy: obj.strategy || '',
       trust: (obj.trust_language || '').toLowerCase() === 'yes',
       newlead: (obj.new_leader || '').toLowerCase() === 'yes',
+      latestnews: obj.latest_news || obj.latestnews || '',
+      newsupdated: obj.news_updated || obj.newsupdated || '',
     };
   }).filter(d => d.brand);
 }
@@ -612,6 +648,42 @@ function showSavePrompt(rowIdx, d){
   window._pendingEdit = {rowIdx, values, d};
 }
 
+// ── FETCH LATEST FOR SINGLE BRAND ──
+function fetchLatest(brand, category, rowIdx) {
+  const btn = document.getElementById('fetch-' + rowIdx);
+  if (!btn || btn.classList.contains('loading')) return;
+
+  btn.classList.add('loading');
+  btn.querySelector('.fetch-icon').textContent = '↻';
+  btn.querySelector('.fetch-label').textContent = 'Fetching...';
+
+  const url = WEB_APP_URL + '?brand=' + encodeURIComponent(brand) + '&category=' + encodeURIComponent(category);
+
+  fetch(url, {mode: 'no-cors'})
+    .then(() => {
+      // no-cors means we can't read response but request was sent
+      // Wait 8 seconds for script to complete then reload data
+      setTimeout(() => {
+        btn.classList.remove('loading');
+        btn.classList.add('done');
+        btn.querySelector('.fetch-icon').textContent = '✓';
+        btn.querySelector('.fetch-label').textContent = 'Updated';
+        // Reload from sheet after 2 more seconds
+        setTimeout(() => {
+          loadData();
+          btn.classList.remove('done');
+          btn.querySelector('.fetch-icon').textContent = '↻';
+          btn.querySelector('.fetch-label').textContent = 'Fetch latest';
+        }, 2000);
+      }, 8000);
+    })
+    .catch(() => {
+      btn.classList.remove('loading');
+      btn.querySelector('.fetch-icon').textContent = '↻';
+      btn.querySelector('.fetch-label').textContent = 'Fetch latest';
+    });
+}
+
 // ── RENDER ──
 function render(){
   const q=document.getElementById('srch').value.toLowerCase();
@@ -708,6 +780,7 @@ function render(){
         ${notesHtml}
         ${warnHtml}
         ${pitchHtml}
+        ${newsTimelineHtml}
       </div>
       <div class="cfoot">${stratHtml}<span style="font-size:9.5px;color:var(--faint)">${d.hq}</span></div>
     </div>`;
