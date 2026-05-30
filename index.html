@@ -492,11 +492,40 @@ function loadData() {
   btn.classList.add('spinning');
   icon.textContent = '↻';
 
-  fetch(SHEET_URL + '&t=' + Date.now(), {mode:'cors'})
-    .then(r => r.text())
-    .then(text => {
-      const rows = parseCSV(text);
-      RAW = csvToObjects(rows);
+  // Use Web App to fetch data — bypasses Google Sheets CORS issues
+  fetch(WEB_APP_URL + '?action=getall&t=' + Date.now())
+    .then(r => r.json())
+    .then(json => {
+      if (!json.success) throw new Error(json.error || 'Unknown error');
+      RAW = json.data.map(row => {
+        // Normalize keys
+        const d = {};
+        Object.keys(row).forEach(k => {
+          d[k.toLowerCase().replace(/\s+/g,'_').replace(/[^a-z0-9_]/g,'')] = row[k];
+        });
+        return {
+          brand: d.brand || '',
+          cat: d.category || '',
+          tier: d.tier || 'C',
+          hq: d.hq || '',
+          name: d.contact_name || '',
+          desig: d.designation || '',
+          phone: d.phone || '',
+          email: d.email || '',
+          url: d.linkedin || '',
+          status: d.status || 'not_contacted',
+          pain: d.pain_point || '',
+          pitch: d.pitch_angle || '',
+          warning: d.warning || '',
+          notes: d.notes || '',
+          strategy: d.strategy || '',
+          trust: (d.trust_language || '').toLowerCase() === 'yes',
+          newlead: (d.new_leader || '').toLowerCase() === 'yes',
+          latestnews: d.latest_news || '',
+          newsupdated: d.news_updated || '',
+          _row: json.data.indexOf(row) + 2
+        };
+      }).filter(d => d.brand);
       const now = new Date();
       document.getElementById('last-sync').textContent =
         'Last synced: ' + now.toLocaleTimeString('en-IN', {hour:'2-digit',minute:'2-digit'});
@@ -506,7 +535,7 @@ function loadData() {
     .catch(err => {
       btn.classList.remove('spinning');
       document.getElementById('grid').innerHTML =
-        `<div class="error-msg">⚠ Could not load data from Google Sheets.<br><br>Make sure the sheet is shared as "Anyone with the link can view".<br><small>${err.message}</small></div>`;
+        '<div class="error-msg">⚠ Could not load data.<br><small>' + err.message + '</small></div>';
       document.getElementById('last-sync').textContent = 'Sync failed';
     });
 }
