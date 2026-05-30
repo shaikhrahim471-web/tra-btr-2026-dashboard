@@ -62,8 +62,11 @@ header{
 .fb:hover{border-color:var(--muted);color:var(--text)}
 .fb.on{color:#fff;border-color:transparent}
 .fb.on.x0{background:#1c1a17}
+.fb.on.xA{background:#166534}
+.fb.on.xB{background:#1e40af}
+.fb.on.xC{background:#4b5563}
 .fb.on.xT{background:#c8390a}
-.fb.on.xN2{background:#4b5563}
+.fb.on.xN2{background:#374151}
 .fb.on.xP{background:#991b1b}
 .fb.on.xS{background:#92400e}
 .cb{font-size:11px;color:var(--faint);white-space:nowrap}
@@ -268,6 +271,9 @@ textarea.field-input{resize:vertical;min-height:70px}
   <input class="srch" type="text" id="srch" placeholder="Search brand, name, city…" oninput="render()">
   <div class="fbar">
     <button class="fb on x0" onclick="sf('all',this)">All</button>
+    <button class="fb xA" onclick="sf('A',this)">Tier A</button>
+    <button class="fb xB" onclick="sf('B',this)">Tier B</button>
+    <button class="fb xC" onclick="sf('C',this)">Tier C</button>
     <button class="fb xT" onclick="sf('today',this)">⚡ Act today</button>
     <button class="fb xN2" onclick="sf('new',this)">📋 Not contacted</button>
     <button class="fb xP" onclick="sf('pain',this)">🔴 Pain point</button>
@@ -519,9 +525,9 @@ function sf(f,btn){
   AF=f;
   document.querySelectorAll('.fb').forEach(b=>{
     b.classList.remove('on');
-    ['x0','xT','xN2','xP','xS'].forEach(c=>b.classList.remove(c));
+    ['x0','xA','xB','xC','xT','xN2','xP','xS'].forEach(c=>b.classList.remove(c));
   });
-  const cm={all:'x0',today:'xT',new:'xN2',pain:'xP',stuck:'xS'};
+  const cm={all:'x0',A:'xA',B:'xB',C:'xC',today:'xT',new:'xN2',pain:'xP',stuck:'xS'};
   btn.classList.add('on',cm[f]||'x0');
   render();
 }
@@ -616,6 +622,9 @@ function render(){
     if(d.tier==='A')cA++;else if(d.tier==='B')cB++;else cC++;
     if(d.pain)cP++;
     if(d.status==='meeting_scheduled')cM++;
+    if(AF==='A'&&d.tier!=='A')return;
+    if(AF==='B'&&d.tier!=='B')return;
+    if(AF==='C'&&d.tier!=='C')return;
     if(AF==='today'&&!['meeting_scheduled','warm','waiting'].includes(d.status))return;
     if(AF==='new'&&d.status!=='not_contacted')return;
     if(AF==='pain'&&!d.pain)return;
