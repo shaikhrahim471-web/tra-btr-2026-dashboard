@@ -787,6 +787,7 @@ function render(){
 
     const notesHtml=(d.notes&&d.notes.trim())?`<div class="nblock"><div class="nlabel">Last note</div>${d.notes}</div>`:'';
     const warnHtml=d.warning?`<div class="wblock">⚠ ${d.warning}</div>`:'';
+    let newsTimelineHtml='';
     const pitchHtml=d.pitch?`<div class="pblock"><div class="plabel">Pitch angle</div>${d.pitch}</div>`:'';
     const stratHtml=d.strategy?`<span class="sbadge2">${d.strategy}</span>`:`<span></span>`;
 
