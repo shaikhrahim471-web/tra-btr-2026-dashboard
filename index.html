@@ -215,9 +215,7 @@ textarea.field-input{resize:vertical;min-height:70px}
   </div>
 </div>
 
-<div class="grid" id="grid">
-  <div class="loading"><div class="spinner"></div><div class="loading-text">Loading from Google Sheets…</div></div>
-</div>
+<div class="grid" id="grid"></div>
 
 <!-- EDIT MODAL -->
 <div class="modal-overlay" id="modal" onclick="closeModal(event)">
@@ -321,15 +319,19 @@ function loadSheet() {
   const ri = document.getElementById('ri');
   btn.classList.add('spinning');
 
-  // Try gviz CSV — works when file is opened locally in logged-in Chrome
+  // Try gviz CSV — works when opened as local file in logged-in Chrome
   const url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:csv&sheet=Sheet1&t=' + Date.now();
-  fetch(url, {credentials:'include'})
-    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
+  
+  // Use AbortController to timeout after 8 seconds
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 8000);
+  
+  fetch(url, {credentials:'include', signal: controller.signal})
+    .then(r => { clearTimeout(timeout); if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
     .then(txt => {
       const rows = parseCSV(txt);
       if (rows.length < 2) throw new Error('Empty sheet response');
       const fresh = csvToRAW(rows);
-      // Merge — keep local status edits, update everything else
       RAW = fresh.map(d => {
         const key = d.brand+'|'+d.cat;
         d.status = ST[key] || d.status || 'not_contacted';
@@ -341,11 +343,11 @@ function loadSheet() {
       render();
     })
     .catch(err => {
+      clearTimeout(timeout);
       btn.classList.remove('spinning');
-      document.getElementById('last-sync').textContent = 'Using cached data';
-      // Fall back to seed data already in RAW — still renders
-      render();
-      console.warn('Sheet sync failed:', err.message);
+      document.getElementById('last-sync').textContent = 'Showing cached data';
+      console.warn('Sheet sync failed (normal on GitHub Pages):', err.message);
+      // Data already rendered from seed — no action needed
     });
 }
 
@@ -574,8 +576,12 @@ document.addEventListener('click',e=>{
   if(!e.target.closest('.swrap'))document.querySelectorAll('.smenu').forEach(m=>m.classList.remove('open'));
 });
 
-// Load fresh data from sheet on startup
-loadSheet();
+// Render immediately with seed data
+// Seed statuses
+RAW.forEach(d => { ST[d.brand+'|'+d.cat] = d.status || 'not_contacted'; });
+render();
+// Then try sheet sync in background (only works when opened as local file in Chrome)
+setTimeout(loadSheet, 500);
 </script>
 </body>
 </html>
