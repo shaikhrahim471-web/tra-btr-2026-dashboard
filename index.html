@@ -7,17 +7,10 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#f0ede6;--card:#fff;--border:#e4e0d8;--text:#1c1a17;
-  --muted:#6b6760;--faint:#a09c96;
-}
+:root{--bg:#f0ede6;--card:#fff;--border:#e4e0d8;--text:#1c1a17;--muted:#6b6760;--faint:#a09c96}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
 
-header{
-  background:#1c1a17;padding:16px 28px;
-  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
-  position:sticky;top:0;z-index:200;
-}
+header{background:#1c1a17;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;position:sticky;top:0;z-index:200}
 .hd-left h1{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;letter-spacing:-0.2px}
 .hd-left p{font-size:11px;color:#6b6760;margin-top:2px}
 .hd-right{display:flex;align-items:center;gap:16px}
@@ -25,156 +18,69 @@ header{
 .hs{text-align:center}
 .hs-n{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;line-height:1}
 .hs-l{font-size:9px;color:#6b6760;text-transform:uppercase;letter-spacing:0.8px;margin-top:2px}
-.hs-n.na{color:#4ade80}.hs-n.nb{color:#60a5fa}.hs-n.nc{color:#9ca3af}
-.hs-n.np{color:#f87171}.hs-n.nm{color:#34d399}
+.hs-n.na{color:#4ade80}.hs-n.nb{color:#60a5fa}.hs-n.nc{color:#9ca3af}.hs-n.np{color:#f87171}.hs-n.nm{color:#34d399}
 
-/* refresh */
-.refresh-btn{
-  display:flex;align-items:center;gap:5px;font-family:'Inter',sans-serif;
-  font-size:11px;font-weight:500;padding:6px 12px;border-radius:6px;
-  border:1.5px solid #3d3a36;background:transparent;color:#9b9890;
-  cursor:pointer;transition:all 0.15s;white-space:nowrap;
-}
+.refresh-btn{display:flex;align-items:center;gap:5px;font-family:'Inter',sans-serif;font-size:11px;font-weight:500;padding:6px 12px;border-radius:6px;border:1.5px solid #3d3a36;background:transparent;color:#9b9890;cursor:pointer;transition:all 0.15s;white-space:nowrap}
 .refresh-btn:hover{border-color:#9b9890;color:#fff}
 .refresh-btn.spinning .ri{animation:spin 1s linear infinite}
-@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 .ri{display:inline-block;font-size:13px}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 .last-sync{font-size:10px;color:#4b4845;margin-top:2px;text-align:right}
 
-/* TOOLBAR */
-.toolbar{
-  background:#fff;border-bottom:1px solid var(--border);
-  padding:10px 28px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;
-  position:sticky;top:61px;z-index:199;
-}
-.srch{
-  font-family:'Inter',sans-serif;font-size:12px;padding:7px 12px;
-  border:1px solid var(--border);border-radius:6px;
-  background:var(--bg);color:var(--text);width:200px;outline:none;
-}
+.toolbar{background:#fff;border-bottom:1px solid var(--border);padding:10px 28px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;position:sticky;top:61px;z-index:199}
+.srch{font-family:'Inter',sans-serif;font-size:12px;padding:7px 12px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);width:200px;outline:none}
 .srch:focus{border-color:#6b6760}
 .fbar{display:flex;gap:5px;flex-wrap:wrap;flex:1}
-.fb{
-  font-size:11px;font-weight:500;padding:4px 11px;border-radius:16px;
-  border:1.5px solid var(--border);background:var(--card);color:var(--muted);
-  cursor:pointer;white-space:nowrap;transition:all 0.12s;font-family:'Inter',sans-serif;
-}
+.fb{font-size:11px;font-weight:500;padding:4px 11px;border-radius:16px;border:1.5px solid var(--border);background:var(--card);color:var(--muted);cursor:pointer;white-space:nowrap;transition:all 0.12s;font-family:'Inter',sans-serif}
 .fb:hover{border-color:var(--muted);color:var(--text)}
 .fb.on{color:#fff;border-color:transparent}
-.fb.on.x0{background:#1c1a17}
-.fb.on.xA{background:#166534}
-.fb.on.xB{background:#1e40af}
-.fb.on.xC{background:#4b5563}
-.fb.on.xT{background:#c8390a}
-.fb.on.xN2{background:#374151}
-.fb.on.xP{background:#991b1b}
-.fb.on.xS{background:#92400e}
+.fb.on.x0{background:#1c1a17}.fb.on.xA{background:#166534}.fb.on.xB{background:#1e40af}.fb.on.xC{background:#4b5563}
+.fb.on.xT{background:#c8390a}.fb.on.xN2{background:#374151}.fb.on.xP{background:#991b1b}.fb.on.xS{background:#92400e}
 .cb{font-size:11px;color:var(--faint);white-space:nowrap}
 
-/* SORT */
 .sort-wrap{position:relative}
-.sort-btn{
-  display:flex;align-items:center;gap:5px;font-size:11px;font-weight:500;
-  padding:5px 12px;border-radius:6px;border:1.5px solid var(--border);
-  background:var(--card);color:var(--muted);cursor:pointer;
-  font-family:'Inter',sans-serif;white-space:nowrap;transition:all 0.12s;
-}
+.sort-btn{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:500;padding:5px 12px;border-radius:6px;border:1.5px solid var(--border);background:var(--card);color:var(--muted);cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap;transition:all 0.12s}
 .sort-btn:hover{border-color:var(--muted);color:var(--text)}
 .sort-btn.active{border-color:#1c1a17;color:#1c1a17;background:#f0ede6}
-.sort-menu{
-  display:none;position:absolute;top:calc(100% + 5px);right:0;z-index:500;
-  background:#fff;border:1px solid var(--border);border-radius:8px;
-  box-shadow:0 8px 28px rgba(0,0,0,0.12);min-width:220px;overflow:hidden;
-}
+.sort-menu{display:none;position:absolute;top:calc(100% + 5px);right:0;z-index:500;background:#fff;border:1px solid var(--border);border-radius:8px;box-shadow:0 8px 28px rgba(0,0,0,0.12);min-width:220px;overflow:hidden}
 .sort-menu.open{display:block}
 .sort-section{padding:6px 0;border-bottom:1px solid var(--border)}
 .sort-section:last-child{border-bottom:none}
 .sort-section-label{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:var(--faint);padding:6px 12px 4px}
-.sort-item{
-  font-size:11.5px;padding:7px 12px;cursor:pointer;
-  display:flex;align-items:center;justify-content:space-between;
-  transition:background 0.1s;color:var(--text);
-}
+.sort-item{font-size:11.5px;padding:7px 12px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:background 0.1s;color:var(--text)}
 .sort-item:hover{background:var(--bg)}
 .sort-item.on{background:#f0f9ff;color:#1e40af;font-weight:500}
 .dir-row{display:flex;gap:6px;padding:6px 12px}
 .dir-btn{font-size:10px;padding:3px 8px;border-radius:4px;border:1px solid var(--border);background:var(--bg);color:var(--muted);cursor:pointer}
 .dir-btn.on{background:#1c1a17;color:#fff;border-color:#1c1a17}
 
-/* LOADING */
-.loading{
-  grid-column:1/-1;text-align:center;padding:60px;
-  display:flex;flex-direction:column;align-items:center;gap:12px;
-}
+.loading{grid-column:1/-1;text-align:center;padding:60px;display:flex;flex-direction:column;align-items:center;gap:12px}
 .spinner{width:32px;height:32px;border:3px solid var(--border);border-top-color:#1c1a17;border-radius:50%;animation:spin 0.8s linear infinite}
 .loading-text{font-size:13px;color:var(--muted)}
 
-/* EDIT MODAL */
-.modal-overlay{
-  display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;
-  align-items:center;justify-content:center;
-}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center}
 .modal-overlay.open{display:flex}
-.modal{
-  background:#fff;border-radius:12px;width:560px;max-width:95vw;max-height:90vh;
-  overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.2);
-}
-.modal-head{
-  padding:20px 24px 16px;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  position:sticky;top:0;background:#fff;z-index:1;
-}
+.modal{background:#fff;border-radius:12px;width:560px;max-width:95vw;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.2)}
+.modal-head{padding:20px 24px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;z-index:1}
 .modal-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700}
-.modal-close{
-  width:28px;height:28px;border-radius:6px;border:none;background:var(--bg);
-  cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;
-  color:var(--muted);
-}
+.modal-close{width:28px;height:28px;border-radius:6px;border:none;background:var(--bg);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--muted)}
 .modal-close:hover{background:var(--border)}
 .modal-body{padding:20px 24px}
 .field-group{margin-bottom:16px}
 .field-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--faint);margin-bottom:5px}
-.field-input{
-  width:100%;font-family:'Inter',sans-serif;font-size:13px;
-  padding:8px 10px;border:1px solid var(--border);border-radius:6px;
-  background:var(--bg);color:var(--text);outline:none;
-}
+.field-input{width:100%;font-family:'Inter',sans-serif;font-size:13px;padding:8px 10px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);outline:none}
 .field-input:focus{border-color:#6b6760;background:#fff}
-.field-select{
-  width:100%;font-family:'Inter',sans-serif;font-size:13px;
-  padding:8px 10px;border:1px solid var(--border);border-radius:6px;
-  background:var(--bg);color:var(--text);outline:none;cursor:pointer;
-}
+.field-select{width:100%;font-family:'Inter',sans-serif;font-size:13px;padding:8px 10px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);outline:none;cursor:pointer}
 textarea.field-input{resize:vertical;min-height:70px}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.modal-foot{
-  padding:16px 24px;border-top:1px solid var(--border);
-  display:flex;gap:10px;justify-content:flex-end;
-  position:sticky;bottom:0;background:#fff;
-}
-.btn-save{
-  font-family:'Inter',sans-serif;font-size:13px;font-weight:500;
-  padding:8px 20px;border-radius:6px;border:none;
-  background:#1c1a17;color:#fff;cursor:pointer;transition:opacity 0.1s;
-}
+.modal-foot{padding:16px 24px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end;position:sticky;bottom:0;background:#fff}
+.btn-save{font-family:'Inter',sans-serif;font-size:13px;font-weight:500;padding:8px 20px;border-radius:6px;border:none;background:#1c1a17;color:#fff;cursor:pointer;transition:opacity 0.1s}
 .btn-save:hover{opacity:0.85}
-.btn-cancel{
-  font-family:'Inter',sans-serif;font-size:13px;font-weight:500;
-  padding:8px 16px;border-radius:6px;border:1px solid var(--border);
-  background:var(--card);color:var(--muted);cursor:pointer;
-}
-.save-status{font-size:11px;color:#065f46;display:none;align-items:center;gap:4px}
-.save-status.show{display:flex}
+.btn-cancel{font-family:'Inter',sans-serif;font-size:13px;font-weight:500;padding:8px 16px;border-radius:6px;border:1px solid var(--border);background:var(--card);color:var(--muted);cursor:pointer}
+.save-msg{font-size:11px;color:#065f46}
 
-/* GRID */
 .grid{padding:20px 28px;display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:12px}
-
-/* CARD */
-.card{
-  background:var(--card);border:1px solid var(--border);border-radius:10px;
-  overflow:hidden;display:flex;flex-direction:column;
-  transition:box-shadow 0.15s,transform 0.12s;
-}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow 0.15s,transform 0.12s}
 .card:hover{box-shadow:0 4px 18px rgba(0,0,0,0.09);transform:translateY(-1px)}
 .strip{height:3px}
 .strip.A{background:linear-gradient(90deg,#16a34a,#86efac)}
@@ -182,20 +88,15 @@ textarea.field-input{resize:vertical;min-height:70px}
 .strip.C{background:linear-gradient(90deg,#6b7280,#d1d5db)}
 .card-head{padding:11px 13px 8px;display:flex;align-items:flex-start;gap:9px}
 .tbox{width:28px;height:28px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:11px;font-weight:700}
-.tbox.A{background:#dcfce7;color:#166534}
-.tbox.B{background:#dbeafe;color:#1e40af}
-.tbox.C{background:#f3f4f6;color:#4b5563}
+.tbox.A{background:#dcfce7;color:#166534}.tbox.B{background:#dbeafe;color:#1e40af}.tbox.C{background:#f3f4f6;color:#4b5563}
 .binfo{flex:1;min-width:0}
 .bname{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;line-height:1.2}
 .bcat{font-size:10px;color:var(--muted);margin-top:1px;line-height:1.3}
 .card-actions{display:flex;align-items:flex-start;gap:4px;flex-shrink:0}
 .hqtag{font-size:9.5px;font-weight:500;padding:2px 7px;border-radius:5px;background:var(--bg);color:var(--muted);border:1px solid var(--border);white-space:nowrap}
-.edit-btn{
-  width:24px;height:24px;border-radius:5px;border:1px solid var(--border);
-  background:var(--bg);color:var(--muted);cursor:pointer;font-size:12px;
-  display:flex;align-items:center;justify-content:center;transition:all 0.1s;flex-shrink:0;
-}
+.edit-btn{width:24px;height:24px;border-radius:5px;border:1px solid var(--border);background:var(--bg);color:var(--muted);cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;transition:all 0.1s;flex-shrink:0}
 .edit-btn:hover{background:#1c1a17;color:#fff;border-color:#1c1a17}
+
 .srow{padding:0 13px 9px}
 .sbadge{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:500;padding:3px 10px;border-radius:12px;cursor:pointer;user-select:none}
 .sbadge:hover{opacity:0.75}
@@ -213,67 +114,45 @@ textarea.field-input{resize:vertical;min-height:70px}
 .sitem{font-size:11px;padding:8px 12px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:background 0.1s}
 .sitem:hover{background:var(--bg)}
 .sdot2{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
 .pain{margin:0 13px 9px;padding:7px 10px;border-radius:6px;background:#fef2f2;border-left:3px solid #ef4444;font-size:10.5px;color:#7f1d1d;line-height:1.45;display:flex;gap:6px}
 .pain-icon{flex-shrink:0;font-size:11px;margin-top:1px}
 .cbody{padding:0 13px;flex:1;display:flex;flex-direction:column;gap:8px;padding-bottom:1px}
-.cname{font-size:12.5px;font-weight:600}
-.ctitle{font-size:10.5px;color:var(--muted);margin-top:1px;line-height:1.3}
+.cname{font-size:12.5px;font-weight:600}.ctitle{font-size:10.5px;color:var(--muted);margin-top:1px;line-height:1.3}
 .cpills{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
 .pill{display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 8px;border-radius:8px;text-decoration:none;border:1px solid var(--border);color:var(--muted);background:var(--bg);white-space:nowrap}
 .pill:hover{border-color:#9b9890;color:var(--text)}
-.pill.li{border-color:#0077b5;color:#0077b5}
-.pill.li:hover{background:#e8f4fb}
+.pill.li{border-color:#0077b5;color:#0077b5}.pill.li:hover{background:#e8f4fb}
 .pill.wa{border-color:#25d366;color:#15803d;background:#f0fdf4}
 .pill.em{border-color:#6366f1;color:#4338ca}
 .nocon{font-size:10.5px;padding:6px 9px;border-radius:6px;background:#fce7f3;color:#831843;border-left:3px solid #ec4899;font-style:italic}
 .tags{display:flex;gap:4px;flex-wrap:wrap}
 .tag{font-size:9.5px;font-weight:500;padding:2px 7px;border-radius:7px}
-.tag.tr{background:#fef3c7;color:#78350f}
-.tag.nl{background:#d1fae5;color:#065f46}
-.tag.gp{background:#fce7f3;color:#831843}
-.tag.wn{background:#fff7ed;color:#9a3412}
+.tag.tr{background:#fef3c7;color:#78350f}.tag.nl{background:#d1fae5;color:#065f46}
+.tag.gp{background:#fce7f3;color:#831843}.tag.wn{background:#fff7ed;color:#9a3412}
 .nblock{font-size:10.5px;padding:6px 9px;border-radius:6px;background:#eff6ff;color:#1e3a5f;border-left:3px solid #3b82f6;line-height:1.4}
 .nlabel{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:#3b82f6;margin-bottom:2px}
 .wblock{font-size:10.5px;padding:6px 9px;border-radius:6px;background:#fffbeb;color:#78350f;border-left:3px solid #f59e0b;line-height:1.4}
 .pblock{font-size:10.5px;padding:6px 9px;border-radius:6px;background:#f8f7f4;color:var(--muted);border-left:3px solid var(--border);line-height:1.4}
 .plabel{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--faint);margin-bottom:2px}
-.cfoot{padding:8px 13px;border-top:1px solid var(--border);background:#fafaf8;display:flex;align-items:center;justify-content:space-between;margin-top:9px}
-.sbadge2{font-size:9.5px;font-weight:500;padding:2px 8px;border-radius:7px;background:var(--card);border:1px solid var(--border);color:var(--muted)}
-.empty{grid-column:1/-1;text-align:center;padding:60px;color:var(--faint);font-size:14px}
-.error-msg{grid-column:1/-1;text-align:center;padding:40px;color:#991b1b;font-size:13px;background:#fef2f2;border-radius:8px;margin:20px}
 
-/* FETCH LATEST BUTTON */
-.fetch-btn{
-  display:inline-flex;align-items:center;gap:4px;
-  font-size:9.5px;font-weight:500;padding:2px 8px;border-radius:8px;
-  border:1px solid var(--border);background:var(--bg);color:var(--muted);
-  cursor:pointer;transition:all 0.15s;white-space:nowrap;font-family:'Inter',sans-serif;
-}
-.fetch-btn:hover{border-color:#1c1a17;color:#1c1a17;background:#fff}
-.fetch-btn.loading{border-color:#f59e0b;color:#92400e;background:#fffbeb;cursor:wait}
-.fetch-btn.done{border-color:#10b981;color:#065f46;background:#d1fae5}
-.fetch-icon{font-size:10px;display:inline-block;transition:transform 0.3s}
-.fetch-btn.loading .fetch-icon{animation:spin 0.8s linear infinite}
-@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-
-/* NEWS TIMELINE */
-.news-timeline{
-  font-size:10.5px;padding:7px 10px;border-radius:6px;
-  background:#f8f7f4;border-left:3px solid #e4e0d8;
-  line-height:1.5;
-}
-.news-label{
-  font-size:9px;font-weight:600;text-transform:uppercase;
-  letter-spacing:0.5px;color:var(--faint);margin-bottom:4px;
-  display:flex;align-items:center;justify-content:space-between;
-}
-.news-item{
-  padding:3px 0;border-bottom:0.5px solid var(--border);
-  color:var(--muted);
-}
+.news-block{font-size:10.5px;padding:7px 10px;border-radius:6px;background:#f8f7f4;border-left:3px solid #e4e0d8;line-height:1.5}
+.news-head{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--faint);margin-bottom:4px;display:flex;align-items:center;justify-content:space-between}
+.news-item{padding:3px 0;border-bottom:0.5px solid var(--border);color:var(--muted);font-size:10.5px}
 .news-item:last-child{border-bottom:none}
 .news-date{font-size:9.5px;font-weight:500;color:var(--faint);margin-right:5px;white-space:nowrap}
 .news-crisis{color:#7f1d1d;font-weight:500}
+.fetch-btn{display:inline-flex;align-items:center;gap:3px;font-size:9.5px;font-weight:500;padding:2px 8px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--muted);cursor:pointer;transition:all 0.15s;font-family:'Inter',sans-serif}
+.fetch-btn:hover{border-color:#1c1a17;color:#1c1a17}
+.fetch-btn.loading{border-color:#f59e0b;color:#92400e;background:#fffbeb;cursor:wait}
+.fetch-btn.done{border-color:#10b981;color:#065f46;background:#d1fae5}
+.fetch-btn.loading .fi{animation:spin 0.8s linear infinite}
+.fi{display:inline-block}
+
+.cfoot{padding:8px 13px;border-top:1px solid var(--border);background:#fafaf8;display:flex;align-items:center;justify-content:space-between;margin-top:9px}
+.sbadge2{font-size:9.5px;font-weight:500;padding:2px 8px;border-radius:7px;background:var(--card);border:1px solid var(--border);color:var(--muted)}
+.empty{grid-column:1/-1;text-align:center;padding:60px;color:var(--faint);font-size:14px}
+.err{grid-column:1/-1;text-align:center;padding:40px;color:#991b1b;font-size:13px;background:#fef2f2;border-radius:8px;margin:20px}
 </style>
 </head>
 <body>
@@ -281,12 +160,12 @@ textarea.field-input{resize:vertical;min-height:70px}
 <header>
   <div class="hd-left">
     <h1>TRA Research &mdash; BTR 2026 Outreach Dashboard</h1>
-    <p>Live from Google Sheets &nbsp;&middot;&nbsp; Edit any card &nbsp;&middot;&nbsp; Changes save to sheet instantly</p>
+    <p>Open locally in Chrome &nbsp;&middot;&nbsp; Auto-refresh from Google Sheets &nbsp;&middot;&nbsp; News updates at 7am daily</p>
   </div>
   <div class="hd-right">
     <div>
-      <button class="refresh-btn" id="refresh-btn" onclick="loadData()">
-        <span class="ri" id="refresh-icon">↻</span> Refresh data
+      <button class="refresh-btn" id="refresh-btn" onclick="loadSheet()">
+        <span class="ri" id="ri">↻</span> Refresh data
       </button>
       <div class="last-sync" id="last-sync">Not synced yet</div>
     </div>
@@ -314,15 +193,14 @@ textarea.field-input{resize:vertical;min-height:70px}
   </div>
   <div class="cb" id="cb">Loading…</div>
   <div class="sort-wrap">
-    <button class="sort-btn" id="sort-btn" onclick="toggleSortMenu()">↕ Sort: <span id="sort-label">Urgency</span></button>
+    <button class="sort-btn" id="sort-btn" onclick="toggleSort()">↕ Sort: <span id="slbl">Urgency</span></button>
     <div class="sort-menu" id="sort-menu">
       <div class="sort-section">
         <div class="sort-section-label">Sort by</div>
-        <div class="sort-item on" id="si-urgency" onclick="setSort('urgency')">Urgency (default) <span>✓</span></div>
+        <div class="sort-item on" id="si-urgency" onclick="setSort('urgency')">Urgency <span>✓</span></div>
         <div class="sort-item" id="si-tier" onclick="setSort('tier')">Tier A → B → C</div>
-        <div class="sort-item" id="si-brand" onclick="setSort('brand')">Brand name A–Z</div>
+        <div class="sort-item" id="si-brand" onclick="setSort('brand')">Brand A–Z</div>
         <div class="sort-item" id="si-status" onclick="setSort('status')">Status</div>
-        <div class="sort-item" id="si-hq" onclick="setSort('hq')">HQ city</div>
         <div class="sort-item" id="si-pain" onclick="setSort('pain')">Pain point first</div>
         <div class="sort-item" id="si-newlead" onclick="setSort('newlead')">New leader first</div>
       </div>
@@ -338,24 +216,20 @@ textarea.field-input{resize:vertical;min-height:70px}
 </div>
 
 <div class="grid" id="grid">
-  <div class="loading">
-    <div class="spinner"></div>
-    <div class="loading-text">Loading brand data from Google Sheets…</div>
-  </div>
+  <div class="loading"><div class="spinner"></div><div class="loading-text">Loading from Google Sheets…</div></div>
 </div>
 
 <!-- EDIT MODAL -->
-<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
   <div class="modal" onclick="event.stopPropagation()">
     <div class="modal-head">
-      <div class="modal-title" id="modal-title">Edit Brand</div>
+      <div class="modal-title" id="mtitle">Edit Brand</div>
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
     <div class="modal-body">
-      <input type="hidden" id="edit-row">
-      <div class="field-group">
-        <div class="field-label">Status</div>
-        <select class="field-select" id="edit-status">
+      <input type="hidden" id="erow">
+      <div class="field-group"><div class="field-label">Status</div>
+        <select class="field-select" id="estatus">
           <option value="not_contacted">Not contacted</option>
           <option value="contacted_no_response">Contacted — no response</option>
           <option value="meeting_scheduled">Meeting scheduled</option>
@@ -366,44 +240,19 @@ textarea.field-input{resize:vertical;min-height:70px}
         </select>
       </div>
       <div class="field-row">
-        <div class="field-group">
-          <div class="field-label">Contact Name</div>
-          <input class="field-input" id="edit-name" type="text" placeholder="Full name">
-        </div>
-        <div class="field-group">
-          <div class="field-label">Designation</div>
-          <input class="field-input" id="edit-desig" type="text" placeholder="Title / role">
-        </div>
+        <div class="field-group"><div class="field-label">Contact Name</div><input class="field-input" id="ename" type="text"></div>
+        <div class="field-group"><div class="field-label">Designation</div><input class="field-input" id="edesig" type="text"></div>
       </div>
       <div class="field-row">
-        <div class="field-group">
-          <div class="field-label">Phone / WhatsApp</div>
-          <input class="field-input" id="edit-phone" type="text" placeholder="+91 …">
-        </div>
-        <div class="field-group">
-          <div class="field-label">Email</div>
-          <input class="field-input" id="edit-email" type="text" placeholder="name@brand.com">
-        </div>
+        <div class="field-group"><div class="field-label">Phone / WhatsApp</div><input class="field-input" id="ephone" type="text"></div>
+        <div class="field-group"><div class="field-label">Email</div><input class="field-input" id="eemail" type="text"></div>
       </div>
-      <div class="field-group">
-        <div class="field-label">LinkedIn URL</div>
-        <input class="field-input" id="edit-linkedin" type="text" placeholder="https://linkedin.com/in/…">
-      </div>
-      <div class="field-group">
-        <div class="field-label">Notes (after call / last update)</div>
-        <textarea class="field-input" id="edit-notes" placeholder="What happened, what was said, next step…"></textarea>
-      </div>
-      <div class="field-group">
-        <div class="field-label">Pain Point</div>
-        <input class="field-input" id="edit-pain" type="text" placeholder="Current challenge or bad press…">
-      </div>
-      <div class="field-group">
-        <div class="field-label">Pitch Angle</div>
-        <textarea class="field-input" id="edit-pitch" placeholder="How to position the TRA recognition for this brand…" style="min-height:55px"></textarea>
-      </div>
+      <div class="field-group"><div class="field-label">LinkedIn URL</div><input class="field-input" id="elinkedin" type="text"></div>
+      <div class="field-group"><div class="field-label">Notes</div><textarea class="field-input" id="enotes"></textarea></div>
+      <div class="field-group"><div class="field-label">Pain Point</div><input class="field-input" id="epain" type="text"></div>
     </div>
     <div class="modal-foot">
-      <div class="save-status" id="save-status">✓ Saved to sheet</div>
+      <span class="save-msg" id="smsg"></span>
       <button class="btn-cancel" onclick="closeModal()">Cancel</button>
       <button class="btn-save" onclick="saveEdit()">Save changes</button>
     </div>
@@ -411,326 +260,230 @@ textarea.field-input{resize:vertical;min-height:70px}
 </div>
 
 <script>
+// ── CONFIG ──
 const SHEET_ID = '151fIRxl25h9Tam5vFwJGfejlc-AogN4rD3tnFkP3Oyo';
-const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR5tMCkn4uVsNR6wNQXSY0X-fMMbjL8E0rkEoGqGLnouG7PMk8oq8cpIQSDoo3dVEKk45L0NTvWDjR5/pub?output=csv&gid=0';
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxD4SHG23iS8Gw5mOmUzM65z0RPAFq6M3mgp4_xu-nINY6gQYRCb3A0NwbCG5fnrCg6dw/exec';
+const WEB_APP  = 'https://script.google.com/macros/s/AKfycbxD4SHG23iS8Gw5mOmUzM65z0RPAFq6M3mgp4_xu-nINY6gQYRCb3A0NwbCG5fnrCg6dw/exec';
 
-const SL={
-  not_contacted:'Not contacted',contacted_no_response:'Contacted — no response',
-  meeting_scheduled:'Meeting scheduled',proposal_sent:'Proposal sent',
-  warm:'Warm — following up',waiting:'Waiting (call back later)',closed:'Not interested / Closed'
-};
-const SC={
-  not_contacted:'#9ca3af',contacted_no_response:'#f59e0b',meeting_scheduled:'#10b981',
-  proposal_sent:'#3b82f6',warm:'#f97316',waiting:'#8b5cf6',closed:'#d1d5db'
-};
-const STATUS_ORDER={meeting_scheduled:0,warm:1,waiting:2,contacted_no_response:3,not_contacted:4,proposal_sent:5,closed:6};
+const SL={not_contacted:'Not contacted',contacted_no_response:'Contacted — no response',meeting_scheduled:'Meeting scheduled',proposal_sent:'Proposal sent',warm:'Warm — following up',waiting:'Waiting (call back later)',closed:'Not interested / Closed'};
+const SC={not_contacted:'#9ca3af',contacted_no_response:'#f59e0b',meeting_scheduled:'#10b981',proposal_sent:'#3b82f6',warm:'#f97316',waiting:'#8b5cf6',closed:'#d1d5db'};
+const SO={meeting_scheduled:0,warm:1,waiting:2,contacted_no_response:3,not_contacted:4,proposal_sent:5,closed:6};
 
-let RAW = [];
-let AF = 'all', SORT = 'urgency', DIR = 'asc';
-let editRowIndex = -1;
+// Seed data — updated from sheet on load
+let RAW = [{"brand": "LIVA", "cat": "FABRICS - SUSTAINABLE", "name": "Priyanaka Priyadarshani", "desig": "VP national head", "phone": "have on whatsapp", "email": "", "url": "", "notes": "has agreed for a meeting but not able to book a slot check with her on 2.3.26", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "Greenwashing scrutiny.", "trust": false, "newlead": false, "pitch": "Priyanaka has agreed for meeting per notes. Follow up urgently to book slot.", "warning": "Meeting agreed but slot not booked. Act now - 2.3.26 note suggests this is overdue.", "status": "meeting_scheduled"}, {"brand": "NOISE", "cat": "SMART WEARABLES", "name": "Shantanu Chauhan", "desig": "Director - Marketing (Brand & Growth)", "phone": "have on whatsapp", "email": "", "url": "https://www.linkedin.com/in/shantanu-chauhan-/", "notes": "finally reached out top him and he seems excieted about winning played the boat angle", "strategy": "", "tier": "A", "hq": "Gurugram", "pain": "India smartwatch shipments fell 27% YoY Q2 2025.", "trust": false, "newlead": true, "pitch": "Category declining means trust differentiation matters more. Your notes say Shantanu is excited about winning.", "warning": "Shantanu Chauhan Director Marketing from your file is correct. He is excited per your notes - act fast.", "status": "contacted_no_response"}, {"brand": "CIPLA", "cat": "PHARMACEUTICALS - INDIAN", "name": "Karishma Bajaj", "desig": "Head Of Marketing", "phone": "+91 98194 36275", "email": "karishma.bajaj1@cipla.com", "url": "https://www.linkedin.com/in/karishma-bajaj-097452141/", "notes": "", "strategy": "", "tier": "A", "hq": "Mumbai", "pain": "Dual leadership transition - new CEO Apr 2026.", "trust": true, "newlead": true, "pitch": "Trust is Cipla own language. Double new-leadership window.", "warning": "Karishma Bajaj Head of Marketing from your file is right level. Use her.", "status": "not_contacted"}, {"brand": "HDFC ERGO", "cat": "GENERAL INSURANCE - PRIVATE", "name": "Neha S Bhattacharyya", "desig": "Senior Vice President Marketing", "phone": "919930250258", "email": "neha.bhattacharyya@hdfcergo.com", "url": "https://www.linkedin.com/in/neha-sb/", "notes": "", "strategy": "", "tier": "A", "hq": "Mumbai", "pain": "New CEO from Apr 2026 - leadership transition.", "trust": true, "newlead": true, "pitch": "New CEO = best window for new brand initiative. Insurance = 100% trust category.", "warning": "Neha Bhattacharyya SVP Marketing in your file is correct. Use her.", "status": "not_contacted"}, {"brand": "SKODA", "cat": "FOUR WHEELER - PREMIUM", "name": "Ashish Gupta", "desig": "Brand Director - Skoda India", "phone": "+91 98719 74123", "email": "+91 88796 79918", "url": "https://www.linkedin.com/in/ashish-g-7250b08/", "notes": "Have sent inmail", "strategy": "Meeting route", "tier": "A", "hq": "Pune", "pain": "", "trust": false, "newlead": true, "pitch": "Two wins premium and SUV - one conversation. New Brand Director May 2025.", "warning": "Ashish Gupta Brand Director from your file is correct. InMail sent per notes.", "status": "contacted_no_response"}, {"brand": "DAIKIN", "cat": "AIR CONDITIONERS", "name": "Manoj Agarwal", "desig": "Vice President - Marketing & Product Management", "phone": "1839780049384", "email": "manoj.agarwal@daikinindia.com", "url": "https://www.linkedin.com/in/manoj-agarwal-88aa1baa", "notes": "has agreed for a meeting which will be scheduled next week", "strategy": "Meeting route", "tier": "C", "hq": "Unknown", "pain": "", "trust": false, "newlead": false, "pitch": "Review needed.", "warning": "", "status": "meeting_scheduled"}, {"brand": "OLX", "cat": "INTERNET CLASSIFIEDS", "name": "Pratyash Sharma", "desig": "Marketing Lead", "phone": "have on whatsapp", "email": "", "url": "", "notes": "we have a meeting with them today at 4 pm", "strategy": "", "tier": "C", "hq": "Gurugram", "pain": "", "trust": true, "newlead": false, "pitch": "Pratyash Sharma on WhatsApp. Meeting was today per notes - follow up outcome.", "warning": "Meeting was scheduled. What was the outcome?", "status": "meeting_scheduled"}, {"brand": "COCA-COLA", "cat": "AERATED BEVERAGES", "name": "Sanket Ray", "desig": "President, India and Southwest Asia and Emerging Large Markets", "phone": "", "email": "", "url": "https://www.linkedin.com/in/sanket-ray-4063451/", "notes": "", "strategy": "", "tier": "A", "hq": "Gurugram", "pain": "Health backlash against aerated drinks growing.", "trust": false, "newlead": true, "pitch": "Sanket Ray is too senior (President of entire India business). Correct contact is Greishma Singh VP Marketing.", "warning": "CONFLICT: Sanket Ray in your file is too senior. Correct first contact is Greishma Singh VP Marketing who replaced Arnab Roy Sep 2024.", "status": "not_contacted"}, {"brand": "INDIGO AIRLINES", "cat": "AIRLINES - INDIAN", "name": "Deepti Sampat", "desig": "Vice President Marketing and Digital at IndiGo", "phone": "", "email": "", "url": "https://www.linkedin.com/in/deepti-sampat-45120a1/", "notes": "", "strategy": "", "tier": "A", "hq": "Gurugram", "pain": "SEVERE CRISIS: flights cancelled CEO resigned food quality scandals.", "trust": false, "newlead": true, "pitch": "Deepti Sampat VP Marketing from your file is more senior than my earlier contact. Use Deepti Sampat.", "warning": "Your contact Deepti Sampat is better than my earlier suggestion of Ruchika Gupta. Use Deepti.", "status": "not_contacted"}, {"brand": "JAGUAR", "cat": "FOUR WHEELER - SUPER LUXURY", "name": "Ankur kansal", "desig": "Brand Director", "phone": "+91 98195 93582", "email": "akansal1@jaguarlandrover.com", "url": "https://www.linkedin.com/in/ankur-kansal-9b34361/", "notes": "Have sent an email", "strategy": "Meeting route", "tier": "B", "hq": "Mumbai", "pain": "Pivoting entirely to EV - brand transformation risk.", "trust": false, "newlead": false, "pitch": "Consumer trust = anchor during EV transformation. Email sent per notes.", "warning": "Ankur Kansal confirmed correct.", "status": "contacted_no_response"}, {"brand": "AJIO", "cat": "ONLINE FASHION RETAILER", "name": "Arpan Biswas", "desig": "CMO", "phone": "have on whatsapp", "email": "", "url": "", "notes": "", "strategy": "", "tier": "A", "hq": "Mumbai", "pain": "E-commerce product quality trust concern.", "trust": false, "newlead": false, "pitch": "You already know Arpan Biswas CMO. Use existing relationship.", "warning": "Confirmed correct. You have him on WhatsApp.", "status": "not_contacted"}, {"brand": "DR.ORTHO", "cat": "PAIN RELIEF OIL - AYURVEDIC", "name": "Narendra Singh", "desig": "Digital Marketing & Growth Head", "phone": "+91 88474 21248", "email": "narendra.singh@divisa.in", "url": "https://www.linkedin.com/in/narendrasinghr/", "notes": "", "strategy": "has said after march", "tier": "B", "hq": "Kolkata", "pain": "", "trust": false, "newlead": false, "pitch": "Narendra Singh Digital Marketing Head. Notes say after March - follow up now.", "warning": "Notes say after March - that has passed. Follow up now.", "status": "waiting"}, {"brand": "HDFC BANK", "cat": "BANK - PRIVATE", "name": "Ravi Santhanam", "desig": "Group Head, CMO, Head-Direct to Consumer Business", "phone": "919322249413", "email": "+91 98200 18100", "url": "https://www.linkedin.com/in/ravi-santhanam-089b065/", "notes": "", "strategy": "", "tier": "A", "hq": "Mumbai", "pain": "GOVERNANCE CRISIS May 2026: CMO named in probe. CEO and CFO implicated.", "trust": true, "newlead": false, "pitch": "DO NOT APPROACH NOW. Wait 2-3 months. Trust narrative critical post-crisis.", "warning": "Ravi Santhanam is in active probe - approaching now would be tone-deaf.", "status": "not_contacted"}, {"brand": "ASIAN PAINTS", "cat": "PAINTS", "name": "Ronojoy Chakravarty", "desig": "General Manager - Head of Marketing, Asian Paints", "phone": "", "email": "", "url": "https://www.linkedin.com/in/ronojoy-chakravarty-25122714/", "notes": "", "strategy": "", "tier": "A", "hq": "Mumbai", "pain": "Profit -35% FY25. Berger and Indigo Paints eating share.", "trust": true, "newlead": false, "pitch": "Warranty campaign explicitly uses trust as anchor. Pain point = new entrant competition.", "warning": "Your contact Ronojoy Chakravarty GM Head of Marketing is correct - better than my earlier suggestion.", "status": "not_contacted"}, {"brand": "ACER", "cat": "PERSONAL COMPUTER", "name": "Sooraj Balakrishnan", "desig": "Head Of Marketing", "phone": "have on whatsapp", "email": "", "url": "https://www.linkedin.com/in/soorajbalakrishnan/", "notes": "", "strategy": "", "tier": "A", "hq": "Gurugram", "pain": "PC market competitive.", "trust": false, "newlead": false, "pitch": "Trust-heavy purchase. Indian recognition differentiates vs Dell HP Lenovo.", "warning": "Sooraj Balakrishnan Head of Marketing on WhatsApp from your file.", "status": "not_contacted"}, {"brand": "TP LINK", "cat": "ROUTERS", "name": "Savio Almedia", "desig": "Head of Marketing", "phone": "have on whatsapp", "email": "", "url": "", "notes": "have reached out throuh call but no response so I have sent him a message and asked for a meetin person, since we already had an online last time in MDB 25", "strategy": "", "tier": "C", "hq": "Mumbai", "pain": "Chinese brand perception.", "trust": false, "newlead": false, "pitch": "Savio Almeida Head of Marketing. Had meeting last time in MDB 25. Follow up.", "warning": "Previous meeting exists. Follow up.", "status": "contacted_no_response"}, {"brand": "PARACHUTE", "cat": "HAIR OIL", "name": "Ilma Aqeel", "desig": "Brand Manager- Parachute", "phone": "919654255974", "email": "ilma.aqeel@marico.com", "url": "https://www.linkedin.com/in/ilma-aqeel-951783146/", "notes": "", "strategy": "", "tier": "A", "hq": "Mumbai", "pain": "", "trust": false, "newlead": true, "pitch": "Ilma Aqeel is brand manager - good entry but cannot approve 10L alone. Route to Vikram Karwal CMO.", "warning": "Brand manager level - escalation to CMO Vikram Karwal needed for budget approval.", "status": "not_contacted"}, {"brand": "MARUTI SUZUKI SWIFT", "cat": "CAR - HATCHBACK", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "A", "hq": "Gurugram", "pain": "Hatchback under pressure from Tata Punch.", "trust": false, "newlead": false, "pitch": "No contact in your file. Confirmed contact: Partho Banerjee Senior Executive Officer Marketing and Sales Maruti Suzuki.", "warning": "No contact in file. Add Partho Banerjee.", "status": "not_contacted"}, {"brand": "HARPIC", "cat": "TOILET CLEANER", "name": "Abhijit Aswath", "desig": "Marketing Manager & Category Head Harpic", "phone": "", "email": "", "url": "https://www.linkedin.com/in/abhijit-aswath-18160845/", "notes": "", "strategy": "", "tier": "A", "hq": "Mumbai", "pain": "", "trust": false, "newlead": true, "pitch": "Abhijit Aswath is category head - good entry point. Gautam Rishi Marketing Director is escalation.", "warning": "Abhijit Aswath from your file is right first contact. Gautam Rishi (new Apr 2025) is escalation.", "status": "not_contacted"}, {"brand": "TROPICANA", "cat": "PACKAGED FRUIT JUICE", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "A", "hq": "Gurugram", "pain": "Category declining.", "trust": false, "newlead": false, "pitch": "Juice = health claim category. Consumer trust validation powerful when category under scrutiny.", "warning": "No contact in your file. CMO India Beverages PepsiCo is Tarun Bhagat.", "status": "not_contacted"}, {"brand": "VIVO", "cat": "MOBILE PHONES", "name": "Karun Arora", "desig": "General Manager & Head - Marketing Communications", "phone": "", "email": "", "url": "https://www.linkedin.com/in/karun-arora-23711425/", "notes": "", "strategy": "", "tier": "A", "hq": "Gurugram", "pain": "Chinese brand perception - periodic consumer backlash.", "trust": false, "newlead": false, "pitch": "Indian consumer recognition = counter-narrative to Chinese brand trust issue.", "warning": "Karun Arora GM Head Marketing Communications from your file is correct.", "status": "not_contacted"}, {"brand": "SKODA", "cat": "SUV MANUFACTURER - PREMIUM", "name": "Ashish Gupta", "desig": "Brand Director - Skoda India", "phone": "+91 98719 74123", "email": "+91 88796 79918", "url": "https://www.linkedin.com/in/ashish-g-7250b08/", "notes": "", "strategy": "Meeting route", "tier": "A", "hq": "Pune", "pain": "", "trust": false, "newlead": true, "pitch": "Two wins premium and SUV - one conversation. New Brand Director May 2025.", "warning": "Ashish Gupta Brand Director from your file is correct. InMail sent per notes.", "status": "not_contacted"}, {"brand": "NDTV", "cat": "ENGLISH NEWS", "name": "Gaurav Barjatiya", "desig": "Marketing Head - NDTV", "phone": "have on whatsapp", "email": "", "url": "https://www.linkedin.com/in/gbarjatya/", "notes": "had called him but no response", "strategy": "", "tier": "C", "hq": "New Delhi", "pain": "Editorial independence questions post-Adani.", "trust": true, "newlead": false, "pitch": "Gaurav Barjatiya on WhatsApp. Had called no response. One more attempt.", "warning": "No response to calls. Try WhatsApp message.", "status": "contacted_no_response"}, {"brand": "INDIA GATE", "cat": "PACKAGED RICE", "name": "Kunal Sharma", "desig": "Vice President - Heading Marketing", "phone": "have on whatsapp", "email": "", "url": "https://www.linkedin.com/in/sharmakunal/", "notes": "", "strategy": "", "tier": "A", "hq": "New Delhi", "pain": "", "trust": false, "newlead": true, "pitch": "Kunal Sharma VP Marketing confirmed. Elevated Aug 2025 - new in role. Two wins - bundle.", "warning": "Kunal Sharma from your file confirmed correct. New in VP role Aug 2025.", "status": "not_contacted"}, {"brand": "INDIA GATE BASMATI", "cat": "PACKAGED RICE - BRAND", "name": "Kunal Sharma", "desig": "Vice President - Heading Marketing", "phone": "have on whatsapp", "email": "", "url": "https://www.linkedin.com/in/sharmakunal/", "notes": "", "strategy": "", "tier": "A", "hq": "New Delhi", "pain": "", "trust": false, "newlead": true, "pitch": "Bundle with India Gate. One KRBL conversation with Kunal Sharma.", "warning": "Same contact as India Gate.", "status": "not_contacted"}, {"brand": "LAYS", "cat": "WAFERS", "name": "Aastha Bhasin", "desig": "Markering Director, Lay’s and Uncle Chipps", "phone": "", "email": "", "url": "https://www.linkedin.com/in/aastha-bhasin-5b470a8/", "notes": "", "strategy": "", "tier": "A", "hq": "Gurugram", "pain": "", "trust": false, "newlead": true, "pitch": "Aastha Bhasin Marketing Director Lays from your file is right level.", "warning": "Aastha Bhasin from your file is correct. Her CMO boss is Saakshi Verma Menon appointed Jul 2025.", "status": "not_contacted"}, {"brand": "NAVNEET", "cat": "EDUCATIONAL BOOKS", "name": "Nirav Gada", "desig": "Marketing head", "phone": "have on whatsapp", "email": "", "url": "", "notes": "have spoken with him it seems unlikely they will go ahead with this but he has asked to check if their other brands have come into the report, has asked me to mail", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": true, "newlead": false, "pitch": "Nirav Gada Marketing Head. Seems unlikely per notes but asked to check other brands and mail.", "warning": "Send the mail he asked for. Check if other Navneet brands are in report.", "status": "contacted_no_response"}, {"brand": "PLAYSTATION 5", "cat": "VIDEO GAME CONSOLES", "name": "Pankaj Sharma", "desig": "Marketing Initiatives @PlayStation India", "phone": "have on whatsapp", "email": "", "url": "https://www.linkedin.com/in/myslfps/", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "Nintendo Switch 2 competitive pressure.", "trust": false, "newlead": false, "pitch": "Pankaj Sharma on WhatsApp. Indian consumer recognition unusual in gaming - strong differentiator.", "warning": "", "status": "not_contacted"}, {"brand": "CITIBANK", "cat": "BANK - FOREIGN", "name": "Shweta Ramchandani", "desig": "Vice President and Head, External Communications", "phone": "919619105070", "email": "+91 22 3342 1886", "url": "https://www.linkedin.com/in/shweta-ramchandani-a5a4bb9/", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "Citi exited consumer banking - trust repositioning needed.", "trust": true, "newlead": false, "pitch": "Shweta Ramchandani is VP External Communications not marketing. May not be right person.", "warning": "CONFLICT: Shweta Ramchandani handles external comms not brand marketing. May need different contact.", "status": "not_contacted"}, {"brand": "RELIANCE JIOMART", "cat": "ONLINE GROCERY RETAILER", "name": "Lalatendu Panda", "desig": "Sr.VP & Business Head - JioMart ( Quick Commerce & E-commerce)", "phone": "+91 90829 63565", "email": "+91 99302 71470", "url": "https://www.linkedin.com/in/lalatendu-panda-455254a/", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "Food freshness and safety trust.", "trust": false, "newlead": false, "pitch": "Lalatendu Panda is Sr VP Business Head commerce focused. May not be right person for brand licensing.", "warning": "Commerce head not brand head. May need different contact.", "status": "not_contacted"}, {"brand": "BOMBAY DYEING", "cat": "BEDDING & LINEN", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "Legacy brand facing D2C linen competition.", "trust": true, "newlead": false, "pitch": "No contact in file. Need to find marketing head.", "warning": "No contact in file.", "status": "not_contacted"}, {"brand": "KOTAK MUTUAL FUND", "cat": "MUTUAL FUND", "name": "Pankaj Palan", "desig": "Marketing", "phone": "have on whatsapp", "email": "", "url": "https://www.linkedin.com/in/pankaj-palan-036a5956/?isSelfProfile=false", "notes": "", "strategy": "", "tier": "A", "hq": "Mumbai", "pain": "", "trust": true, "newlead": false, "pitch": "Their own LinkedIn bio: vision is to be most trustworthy company in India. Open with that exact line.", "warning": "Pankaj Palan in your file - verify his current designation is still senior enough.", "status": "not_contacted"}, {"brand": "ORGANIC HARVEST", "cat": "SUNSCREEN", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "B", "hq": "Gurugram", "pain": "Greenwashing scrutiny.", "trust": false, "newlead": false, "pitch": "No contact in file. Rahul Agarwal founder CEO is right approach.", "warning": "No contact in file - needs research.", "status": "not_contacted"}, {"brand": "SAMSUNG", "cat": "DIVERSIFIED", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "B", "hq": "Gurugram", "pain": "Chinese brand competition.", "trust": false, "newlead": false, "pitch": "No contact in file. Need Samsung India marketing head.", "warning": "No contact in file - needs research.", "status": "not_contacted"}, {"brand": "ONECARD", "cat": "AI CREDIT SCORE PLANNER", "name": "Manasi Jagdish", "desig": "Head - brand, content & PR", "phone": "+91 98207 02020", "email": "+91 98201 02020", "url": "https://www.linkedin.com/in/manasi-jagdish-67542841/", "notes": "", "strategy": "", "tier": "B", "hq": "Pune", "pain": "Newer brand trust gap vs banks.", "trust": false, "newlead": false, "pitch": "Manasi Jagdish Head Brand Content PR in file. Right level.", "warning": "", "status": "not_contacted"}, {"brand": "COLGATE", "cat": "TOOTHPASTE", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "A", "hq": "Mumbai", "pain": "", "trust": true, "newlead": false, "pitch": "Trust is a stated brand KPI. Ayan Guha (Director Marketing) is confirmed contact not yet in your file. Ad spend 819cr FY26.", "warning": "", "status": "not_contacted"}, {"brand": "COLGATE CIBACA", "cat": "TOOTHPASTE - BRAND", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "A", "hq": "Mumbai", "pain": "", "trust": true, "newlead": false, "pitch": "Bundle with Colgate. Same contact Ayan Guha handles all Colgate India brands.", "warning": "", "status": "not_contacted"}, {"brand": "STARBUCKS", "cat": "CAFÉ", "name": "Mitali Maheshwari", "desig": "Head- Product & Marketing Starbucks India", "phone": "", "email": "", "url": "https://www.linkedin.com/in/mitali-maheshwari-6b4053106/", "notes": "", "strategy": "", "tier": "A", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Mitali Maheshwari Head Product Marketing from your file is right. CEO too senior.", "warning": "Mitali Maheshwari confirmed correct. Not the CEO.", "status": "not_contacted"}, {"brand": "RELIANCE JIO", "cat": "MOBILE SERVICE PROVIDER", "name": "Rohan Khanna", "desig": "Vice President & National Head - Product/Pricing & Marketing Communication", "phone": "", "email": "", "url": "https://www.linkedin.com/in/rohan-khanna-0417967/", "notes": "", "strategy": "", "tier": "B", "hq": "Navi Mumbai", "pain": "Network quality complaints.", "trust": false, "newlead": false, "pitch": "Rohan Khanna VP National Head confirmed in file.", "warning": "", "status": "not_contacted"}, {"brand": "RELIANCE JIO", "cat": "SERVICES - DIVERSIFIED", "name": "Rohan Khanna", "desig": "Vice President & National Head - Product/Pricing & Marketing Communication", "phone": "", "email": "", "url": "https://www.linkedin.com/in/rohan-khanna-0417967/", "notes": "", "strategy": "", "tier": "B", "hq": "Navi Mumbai", "pain": "Network quality complaints.", "trust": false, "newlead": false, "pitch": "Rohan Khanna VP National Head confirmed in file.", "warning": "", "status": "not_contacted"}, {"brand": "TOYOTA INNOVA", "cat": "MPV BRAND - PREMIUM", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "A", "hq": "Bengaluru", "pain": "", "trust": true, "newlead": false, "pitch": "Innova HyCross 2L milestone Apr 2026. Bundle with Fortuner.", "warning": "No contact in your file. Same contact: Sabari Manohar.", "status": "not_contacted"}, {"brand": "TOYOTA FORTUNER", "cat": "SUV BRAND - PREMIUM", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "A", "hq": "Bengaluru", "pain": "", "trust": true, "newlead": false, "pitch": "His own press quotes say continued trust in Toyota quality. Bundle Fortuner and Innova.", "warning": "No contact in your file. Confirmed: Sabari Manohar EVP Sales Service Toyota Kirloskar.", "status": "not_contacted"}, {"brand": "FASTRACK", "cat": "EYEWEAR", "name": "Danny Jacob", "desig": "Head of Marketing- Fastrack", "phone": "", "email": "", "url": "https://www.linkedin.com/in/dannyjacob85/", "notes": "", "strategy": "", "tier": "A", "hq": "Bengaluru", "pain": "", "trust": false, "newlead": false, "pitch": "Danny Jacob Head of Marketing from your file is right. Suparna Mitra CEO is too senior.", "warning": "Danny Jacob confirmed correct contact.", "status": "not_contacted"}, {"brand": "DECATHLON", "cat": "ACTIVEWEAR", "name": "Pearl D'Souza", "desig": "Head of Marketing", "phone": "", "email": "", "url": "https://www.linkedin.com/in/pearl-sharrell/", "notes": "", "strategy": "", "tier": "A", "hq": "Bengaluru", "pain": "", "trust": false, "newlead": false, "pitch": "Two wins Activewear and Sports Equipment. Pearl D'Souza Head of Marketing from your file. Bundle both.", "warning": "Pearl D'Souza confirmed correct for both categories.", "status": "not_contacted"}, {"brand": "KFC", "cat": "QSR", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "A", "hq": "Gurugram", "pain": "", "trust": false, "newlead": false, "pitch": "India recognition differentiates from McDonald's locally.", "warning": "No contact in your file. Confirmed CMO: Moksh Chopra KFC India.", "status": "not_contacted"}, {"brand": "DECATHLON", "cat": "SPORTS EQUIPMENT", "name": "Pearl D'Souza", "desig": "Head of Marketing", "phone": "", "email": "", "url": "https://www.linkedin.com/in/pearl-sharrell/", "notes": "", "strategy": "", "tier": "A", "hq": "Bengaluru", "pain": "", "trust": false, "newlead": false, "pitch": "Two wins Activewear and Sports Equipment. Pearl D'Souza Head of Marketing from your file. Bundle both.", "warning": "Pearl D'Souza confirmed correct for both categories.", "status": "not_contacted"}, {"brand": "GOOGLE PAY", "cat": "DIGITAL PAYMENTS", "name": "Arijit Sen", "desig": "Head of Marketing for Google Pay (India)", "phone": "+91 98711 50290", "email": "arijits@google.com", "url": "https://www.linkedin.com/in/arijit-sen-a370197/", "notes": "have sent a messae", "strategy": "", "tier": "C", "hq": "Gurugram", "pain": "", "trust": true, "newlead": false, "pitch": "Arijit Sen Head of Marketing. Message sent per notes. Trust relevant in payments.", "warning": "Message already sent. Follow up.", "status": "contacted_no_response"}, {"brand": "STAR HEALTH", "cat": "HEALTH INSURANCE - PRIVATE", "name": "R Mohan", "desig": "Sr. Manager - D2C", "phone": "have on whatsapp", "email": "", "url": "https://www.linkedin.com/in/mohan-r-19427121b/", "notes": "Conversation has been shifted to be done with Kotha Kartheek, head of department, have reached out but he was in a meeting", "strategy": "", "tier": "C", "hq": "Unknown", "pain": "", "trust": false, "newlead": false, "pitch": "Review needed.", "warning": "", "status": "contacted_no_response"}, {"brand": "FEVICOL", "cat": "ADHESIVES", "name": "Sandeep Tanwani", "desig": "Chief Marketing Officer", "phone": "+91 90043 56279", "email": "sandeep.tanwani@pidilite.com", "url": "https://www.linkedin.com/in/sandeep-tanwani-771797/", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": true, "newlead": false, "pitch": "Sandeep Tanwani CMO with phone and email. Meta-pitch: brand built on trust gets consumer trust recognition.", "warning": "Strong contact. CMO level with full details.", "status": "not_contacted"}, {"brand": "MAC", "cat": "COSMETICS - PREMIUM", "name": "Sanjana Dedhia", "desig": "Consumer Marketing Executive", "phone": "+91 64685 87907", "email": "sdedhia@estee.com", "url": "https://www.linkedin.com/in/sanjdedhia/", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Sanjana Dedhia Consumer Marketing Executive. Two MAC wins - one ELC India conversation.", "warning": "Executive level - may need escalation for 10L budget.", "status": "not_contacted"}, {"brand": "MAC", "cat": "LIPSTICK - PREMIUM", "name": "Sanjana Dedhia", "desig": "Consumer Marketing Executive", "phone": "+91 64685 87907", "email": "sdedhia@estee.com", "url": "https://www.linkedin.com/in/sanjdedhia/", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Sanjana Dedhia Consumer Marketing Executive. Two MAC wins - one ELC India conversation.", "warning": "Executive level - may need escalation for 10L budget.", "status": "not_contacted"}, {"brand": "NYCIL", "cat": "PRICKLY HEAT POWDER", "name": "Rohan Shah", "desig": "Brand Manager - Nycil", "phone": "1834973512696", "email": "rohan.shah@zyduswellness.com", "url": "https://www.linkedin.com/in/rohan-shah-45588b59/", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Rohan Shah Brand Manager - junior. May need sign-off above for 10L approval.", "warning": "Brand manager level - may need escalation.", "status": "not_contacted"}, {"brand": "ARUN ICECREAMS", "cat": "ICE CREAM/FROZEN DESSERT", "name": "Rashmi Ravindran", "desig": "Marketing Manager", "phone": "+91 72000 08199", "email": "+91 73582 48111", "url": "https://www.linkedin.com/in/rashmiravindrant/", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Rashmi Ravindran Marketing Manager in file. Strong South India brand.", "warning": "", "status": "not_contacted"}, {"brand": "HINDUSTAN PETROLEUM", "cat": "FUEL PRODUCTS", "name": "Check with Pitabas from HP", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Note says check with Pitabas from HP. Confirm that contact.", "warning": "Need to verify Pitabas contact.", "status": "not_contacted"}, {"brand": "MANISH MALHOTRA", "cat": "DESIGNERWEAR - LUXURY", "name": "Sahil Ramchandani", "desig": "Head of marketing", "phone": "919096969213", "email": "", "url": "https://www.linkedin.com/in/sahil-ramchandani-89491529/", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Sahil Ramchandani Head of Marketing. Mumbai-based - easy certificate delivery.", "warning": "", "status": "not_contacted"}, {"brand": "VISA", "cat": "CREDIT CARD NETWORK", "name": "Gaurav Ramdev", "desig": "CMO / Head of Marketing  - India and South Asia", "phone": "+91 82187 70175", "email": "+91 99008 39270", "url": "https://www.linkedin.com/in/gauravramdev/", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": true, "newlead": false, "pitch": "Gaurav Ramdev CMO confirmed in file. Right contact.", "warning": "Confirmed correct.", "status": "not_contacted"}, {"brand": "DURACELL", "cat": "CONSUMER BATTERIES", "name": "Sunil Gadgil", "desig": "Vice President,General Manager India", "phone": "have on whatsapp", "email": "", "url": "https://www.linkedin.com/in/sunil-gadgil-6677015/", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": true, "newlead": false, "pitch": "Sunil Gadgil VP GM India on WhatsApp. Reliability is Duracell - recognition aligns perfectly.", "warning": "Strong contact at right level.", "status": "not_contacted"}, {"brand": "DIOR", "cat": "DEO/PERFUME - LUXURY", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "No contact in file. LVMH India marketing head needed.", "warning": "No contact in file.", "status": "not_contacted"}, {"brand": "LIPTON GREEN LABEL", "cat": "TEA - BRAND", "name": "Nitin Raina", "desig": "Brand Development Marketing- LIPTON", "phone": "", "email": "", "url": "https://www.linkedin.com/in/nitin-raina-2b20b462/", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Nitin Raina Brand Development Marketing. HUL brand may need escalation for budget approval.", "warning": "HUL brand - budget approval may sit above brand manager level.", "status": "not_contacted"}, {"brand": "GODREJ", "cat": "LOCKS", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "No contact in file. Locks category - trust relevant.", "warning": "No contact in file.", "status": "not_contacted"}, {"brand": "ABP MAJHA", "cat": "MARATHI NEWS", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": true, "newlead": false, "pitch": "No contact in file. ABP Network marketing head needed.", "warning": "No contact in file.", "status": "not_contacted"}, {"brand": "RELIANCE DIGITAL", "cat": "ELECTRONICS", "name": "Manoj Jain", "desig": "Sr VP & Head: Omni Channel Marketing", "phone": "", "email": "", "url": "https://www.linkedin.com/in/manojjain16/", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Manoj Jain Sr VP Omni Channel Marketing. Good contact.", "warning": "", "status": "not_contacted"}, {"brand": "ZUDIO", "cat": "VALUE FASHION", "name": "Marjolein Van Brandwijk", "desig": "Head Zudio at Trent Ltd", "phone": "", "email": "", "url": "https://www.linkedin.com/in/marjoleinvanbrandwijk/", "notes": "", "strategy": "", "tier": "B", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Marjolein Van Brandwijk Head Zudio confirmed in file.", "warning": "", "status": "not_contacted"}, {"brand": "W", "cat": "FUSIONWEAR - WOMEN", "name": "Gautam Dhingra", "desig": "head of marketing", "phone": "have on whatsapp", "email": "", "url": "", "notes": "", "strategy": "", "tier": "B", "hq": "Gurugram", "pain": "", "trust": false, "newlead": false, "pitch": "Gautam Dhingra Head of Marketing on WhatsApp.", "warning": "", "status": "not_contacted"}, {"brand": "NALLI", "cat": "SAREES - PREMIUM", "name": "Lavanya Nalli", "desig": "Director at Nalli", "phone": "+91 98840 27584", "email": "+91 98410 27584", "url": "https://www.linkedin.com/in/lavanyanalli/", "notes": "", "strategy": "", "tier": "B", "hq": "Chennai", "pain": "", "trust": true, "newlead": false, "pitch": "Lavanya Nalli Director. Heritage trust brand. TRA recognition = modern consumer validation.", "warning": "", "status": "not_contacted"}, {"brand": "SANTOOR", "cat": "HANDWASH", "name": "check with Siddharth from wipro", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "B", "hq": "Bengaluru", "pain": "", "trust": false, "newlead": false, "pitch": "Your note says check with Siddharth from Wipro. Confirm that contact first.", "warning": "Contact not confirmed yet. Check with Siddharth.", "status": "not_contacted"}, {"brand": "RAJDHANI", "cat": "CHICKPEA FLOUR", "name": "Chetan Jain", "desig": "Director", "phone": "have on whatsapp", "email": "", "url": "", "notes": "", "strategy": "", "tier": "B", "hq": "Bareilly", "pain": "", "trust": false, "newlead": false, "pitch": "Chetan Jain Director on WhatsApp.", "warning": "", "status": "not_contacted"}, {"brand": "GLUCON D", "cat": "POWDERED DRINK", "name": "Roshni Rachel John", "desig": "Brand Manager - Glucon D", "phone": "1838929384755", "email": "roshni.r.john@zyduswellness.com", "url": "https://www.linkedin.com/in/roshniracheljohn/", "notes": "", "strategy": "", "tier": "B", "hq": "Ahmedabad", "pain": "", "trust": false, "newlead": false, "pitch": "Roshni Rachel John Brand Manager - junior. May need escalation for 10L approval.", "warning": "Brand manager level - may need escalation.", "status": "not_contacted"}, {"brand": "KOHLER", "cat": "BATH FIXTURES - LUXURY", "name": "Jacob Kuriakose", "desig": "Director, Head of Marketing - Kohler South Asia", "phone": "have on whatsapp", "email": "", "url": "https://www.linkedin.com/in/kuriakose-jacob/", "notes": "", "strategy": "", "tier": "B", "hq": "Gurugram", "pain": "", "trust": false, "newlead": false, "pitch": "Jacob Kuriakose Director Head of Marketing on WhatsApp.", "warning": "", "status": "not_contacted"}, {"brand": "ORIENTAL INSURANCE", "cat": "GENERAL INSURANCE - PSU", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "B", "hq": "New Delhi", "pain": "", "trust": false, "newlead": false, "pitch": "No contact in file. PSU - approach corporate office New Delhi.", "warning": "No contact in file.", "status": "not_contacted"}, {"brand": "BOROPLUS", "cat": "ANTISEPTIC CREAM - AYURVEDIC", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "B", "hq": "Kolkata", "pain": "", "trust": true, "newlead": false, "pitch": "No contact in file. Emami marketing head needed. Bundle with Dr.Ortho.", "warning": "No contact in file - needs research.", "status": "not_contacted"}, {"brand": "MOTHER'S RECIPE", "cat": "PICKLES", "name": "Sonali J", "desig": "marketing head", "phone": "check with team for background", "email": "", "url": "https://www.linkedin.com/in/sonali-j-6401294b/", "notes": "", "strategy": "", "tier": "B", "hq": "Pune", "pain": "", "trust": false, "newlead": false, "pitch": "Sonali J marketing head in file. Check with team for background per notes.", "warning": "Check with team before reaching out.", "status": "not_contacted"}, {"brand": "WHATSAPP", "cat": "INSTANT MESSAGING SERVICE", "name": "Ravi Garg", "desig": "Country Head - WhatsApp for Business", "phone": "+91 99534 55955", "email": "ravi.garg@whatsapp.com", "url": "https://www.linkedin.com/in/ravi-garg-6b59505/", "notes": "", "strategy": "Meeting route", "tier": "C", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Ravi Garg Country Head WhatsApp for Business.", "warning": "", "status": "not_contacted"}, {"brand": "YOUTUBE", "cat": "VIDEO-SHARING", "name": "Shubha Pai", "desig": "Head of YouTube Sales & Solutions", "phone": "1839766546596", "email": "shubhapai@google.com", "url": "https://www.linkedin.com/in/paishubha", "notes": "", "strategy": "Meeting route", "tier": "C", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Shubha Pai Head YouTube Sales. Global product.", "warning": "", "status": "not_contacted"}, {"brand": "HPGAS", "cat": "LPG", "name": "Pitabas Sarangi", "desig": "Marketing", "phone": "have on whatsapp", "email": "", "url": "", "notes": "", "strategy": "", "tier": "C", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Pitabas Sarangi on WhatsApp. Utility brand.", "warning": "", "status": "not_contacted"}, {"brand": "TESLA", "cat": "ELECTRIC CAR", "name": "Sharad Agarwal", "desig": "Country head India", "phone": "918879631259", "email": "sagarwal@tesla.com", "url": "https://www.linkedin.com/in/sharad-agarwal-13013716/", "notes": "", "strategy": "", "tier": "C", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Sharad Agarwal Country Head India. Brand policy may exclude third-party recognition.", "warning": "", "status": "not_contacted"}, {"brand": "FACEBOOK", "cat": "SOCIAL MEDIA", "name": "Arun Srinivas", "desig": "Managing Director & Country Head, India", "phone": "+91 98203 26623", "email": "+91 99207 80085", "url": "https://www.linkedin.com/in/arun-srinivas-6064721/", "notes": "", "strategy": "", "tier": "C", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Arun Srinivas MD Country Head - very senior. Global product.", "warning": "Too senior for first contact.", "status": "not_contacted"}, {"brand": "BAYER", "cat": "AGROCHEMICALS", "name": "Kedar Mangalwedhekar", "desig": "Marketing Head", "phone": "", "email": "", "url": "https://www.linkedin.com/in/kedar-mangalwedhekar-06494a17/", "notes": "", "strategy": "", "tier": "C", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Kedar Mangalwedhekar Marketing Head in file. B2B agrochemical.", "warning": "", "status": "not_contacted"}, {"brand": "RELIANCE", "cat": "DIVERSIFIED", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "C", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "No consumer brand marketing. Skip.", "warning": "", "status": "not_contacted"}, {"brand": "DELTA", "cat": "STATIONERY", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "C", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "No contact in file.", "warning": "", "status": "not_contacted"}, {"brand": "APPLE", "cat": "PERSONAL TECHNOLOGY", "name": "Shagun Seda", "desig": "Head of Marketing Communications", "phone": "", "email": "", "url": "https://www.linkedin.com/in/shagunseda/", "notes": "", "strategy": "", "tier": "C", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Shagun Seda Head Marketing Communications. Apple policy likely excludes third-party recognition.", "warning": "", "status": "not_contacted"}, {"brand": "LUFTHANSA", "cat": "AIRLINES - FOREIGN", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "C", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "No contact in file. Global airline.", "warning": "", "status": "not_contacted"}, {"brand": "VSL", "cat": "EPC CONTRACTORS", "name": "Kailash Basita", "desig": "Managing Director", "phone": "919677129193", "email": "kailash.basita@vsl.com", "url": "https://www.linkedin.com/in/kailash-basita-25a34557/", "notes": "", "strategy": "Meeting route", "tier": "C", "hq": "Unknown", "pain": "", "trust": false, "newlead": false, "pitch": "Kailash Basita MD in file. B2B EPC.", "warning": "", "status": "not_contacted"}, {"brand": "GOOGLE PLAY STORE", "cat": "APP STORE", "name": "Aditya Swamy", "desig": "Managing Director - Google Play", "phone": "+91 98336 33212", "email": "adityaswamy@google.com", "url": "https://www.linkedin.com/in/aditya-swamy-bb355921/", "notes": "", "strategy": "Meeting route", "tier": "C", "hq": "Gurugram", "pain": "", "trust": false, "newlead": false, "pitch": "Aditya Swamy MD Google Play. Global product - single outreach.", "warning": "", "status": "not_contacted"}, {"brand": "GOOGLE", "cat": "INTERNET SEARCH", "name": "Shekar Khosla", "desig": "Vice President Marketing", "phone": "+91 98202 57763", "email": "shekar@google.com", "url": "https://www.linkedin.com/in/shekarkhosla/", "notes": "", "strategy": "Meeting route", "tier": "C", "hq": "Gurugram", "pain": "", "trust": false, "newlead": false, "pitch": "Shekar Khosla VP Marketing. Global brand.", "warning": "", "status": "not_contacted"}, {"brand": "WIPRO", "cat": "SEATING SOLUTIONS", "name": "Siddhart Bhandari", "desig": "Head Of Marketing", "phone": "have on whatsapp", "email": "", "url": "", "notes": "", "strategy": "", "tier": "C", "hq": "Bengaluru", "pain": "", "trust": false, "newlead": false, "pitch": "B2B primarily. Siddharth Bhandari on WhatsApp.", "warning": "", "status": "not_contacted"}, {"brand": "ESAB INDIA", "cat": "WELDING & CUTTING EQUIPMENT", "name": "J V Koteswara Rao", "desig": "Head Marketing - Equipment & Cutting", "phone": "+91 98409 44692", "email": "j_rao@esab.co.in", "url": "https://www.linkedin.com/in/j-v-koteswara-rao-b4790920/", "notes": "", "strategy": "", "tier": "C", "hq": "Chennai", "pain": "", "trust": false, "newlead": false, "pitch": "B2B industrial. Single outreach only.", "warning": "", "status": "not_contacted"}, {"brand": "GOOGLE NEWS", "cat": "ONLINE NEWS AGGREGATOR", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "C", "hq": "Gurugram", "pain": "", "trust": false, "newlead": false, "pitch": "Global product. Skip.", "warning": "", "status": "not_contacted"}, {"brand": "ONGC", "cat": "OIL & GAS - EXPLORATION AND REFINING", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "C", "hq": "New Delhi", "pain": "", "trust": false, "newlead": false, "pitch": "PSU upstream. Skip.", "warning": "", "status": "not_contacted"}, {"brand": "MERO", "cat": "CONSTRUCTION SOLUTIONS", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "C", "hq": "Unknown", "pain": "", "trust": false, "newlead": false, "pitch": "B2B construction. Skip.", "warning": "", "status": "not_contacted"}, {"brand": "LAVA", "cat": "MOBILE PHONES - INDIAN", "name": "Puravansh Maitreya", "desig": "Head of Marketing", "phone": "", "email": "", "url": "https://www.linkedin.com/in/puravansh-maitreya-69067014/", "notes": "", "strategy": "", "tier": "C", "hq": "Noida", "pain": "", "trust": false, "newlead": false, "pitch": "Puravansh Maitreya Head of Marketing. Made in India trust angle.", "warning": "", "status": "not_contacted"}, {"brand": "HEALTHCARE PHARMACEUTICALS", "cat": "PHARMACEUTICALS - FOREIGN", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "C", "hq": "Unknown", "pain": "", "trust": false, "newlead": false, "pitch": "B2B pharma. Skip.", "warning": "", "status": "not_contacted"}, {"brand": "WALMART", "cat": "HYPERMARKET - FOREIGN", "name": "", "desig": "", "phone": "", "email": "", "url": "", "notes": "", "strategy": "", "tier": "C", "hq": "Gurugram", "pain": "", "trust": false, "newlead": false, "pitch": "No consumer retail in India. Skip.", "warning": "", "status": "not_contacted"}, {"brand": "MICROSOFT", "cat": "SOFTWARE PRODUCTS", "name": "Amrita Thapar", "desig": "Regional Marketing Director", "phone": "", "email": "", "url": "https://www.linkedin.com/in/amritathapar/", "notes": "", "strategy": "", "tier": "C", "hq": "Gurugram", "pain": "", "trust": false, "newlead": false, "pitch": "Amrita Thapar Regional Marketing Director. B2B primarily.", "warning": "", "status": "not_contacted"}, {"brand": "DHL", "cat": "EXPRESS SERVICES - FOREIGN", "name": "Jashna Bhalla Motwani", "desig": "Head of Marketing Communications", "phone": "have on whatsapp", "email": "", "url": "https://www.linkedin.com/in/jashnabhalla/", "notes": "No they wont be intrested", "strategy": "", "tier": "C", "hq": "Mumbai", "pain": "", "trust": false, "newlead": false, "pitch": "Your notes say not interested. CLOSED.", "warning": "CLOSED per your notes.", "status": "closed"}, {"brand": "SUN UMBRELLAS", "cat": "UMBRELLAS", "name": "Rupal Bapna", "desig": "VP", "phone": "have on whatsapp", "email": "", "url": "", "notes": "no they wont be paying anything", "strategy": "", "tier": "C", "hq": "Unknown", "pain": "", "trust": false, "newlead": false, "pitch": "Your notes say they wont be paying. CLOSED.", "warning": "CLOSED per your notes.", "status": "closed"}];
+
+// Statuses stored in memory (updated from sheet, editable locally)
+const ST = {};
+RAW.forEach(d => { ST[d.brand+'|'+d.cat] = d.status || 'not_contacted'; });
+
+let AF='all', SORT='urgency', DIR='asc';
 
 // ── LOAD FROM SHEET ──
-function parseCSV(text) {
-  const lines = [];
-  let current = '', inQuote = false;
-  const rows = [];
-  let cells = [];
-  for (let i = 0; i < text.length; i++) {
-    const ch = text[i];
-    if (ch === '"') {
-      if (inQuote && text[i+1] === '"') { current += '"'; i++; }
-      else inQuote = !inQuote;
-    } else if (ch === ',' && !inQuote) {
-      cells.push(current); current = '';
-    } else if ((ch === '\n' || ch === '\r') && !inQuote) {
-      cells.push(current); current = '';
-      if (cells.some(c => c)) rows.push(cells);
+function parseCSV(txt) {
+  const rows = []; let cells = [], cur = '', inQ = false;
+  for (let i = 0; i < txt.length; i++) {
+    const c = txt[i];
+    if (c==='"') { if (inQ && txt[i+1]==='"') { cur+='"'; i++; } else inQ=!inQ; }
+    else if (c===',' && !inQ) { cells.push(cur); cur=''; }
+    else if ((c==='
+'||c==='') && !inQ) {
+      cells.push(cur); cur='';
+      if (cells.some(x=>x)) rows.push(cells);
       cells = [];
-      if (ch === '\r' && text[i+1] === '\n') i++;
-    } else current += ch;
+      if (c==='' && txt[i+1]==='
+') i++;
+    } else cur+=c;
   }
-  if (current || cells.length) { cells.push(current); rows.push(cells); }
+  if (cur||cells.length) { cells.push(cur); rows.push(cells); }
   return rows;
 }
 
-function csvToObjects(rows) {
+function csvToRAW(rows) {
   if (rows.length < 2) return [];
-  const headers = rows[0].map(h => h.trim().toLowerCase().replace(/\s+/g,'_').replace(/[^a-z0-9_]/g,''));
-  return rows.slice(1).map((row, i) => {
-    const obj = { _row: i + 2 }; // 1-indexed, +1 for header
-    headers.forEach((h, j) => { obj[h] = (row[j] || '').trim(); });
-    // Normalize field names
+  const hdrs = rows[0].map(h => h.trim().toLowerCase().replace(/\s+/g,'_').replace(/[^a-z0-9_]/g,''));
+  return rows.slice(1).map((row,i) => {
+    const o = {}; hdrs.forEach((h,j) => { o[h] = (row[j]||'').trim(); });
     return {
-      _row: obj._row,
-      brand: obj.brand || '',
-      cat: obj.category || '',
-      tier: obj.tier || 'C',
-      hq: obj.hq || '',
-      name: obj.contact_name || '',
-      desig: obj.designation || '',
-      phone: obj.phone || '',
-      email: obj.email || '',
-      url: obj.linkedin || '',
-      status: obj.status || 'not_contacted',
-      pain: obj.pain_point || '',
-      pitch: obj.pitch_angle || '',
-      warning: obj.warning || '',
-      notes: obj.notes || '',
-      strategy: obj.strategy || '',
-      trust: (obj.trust_language || '').toLowerCase() === 'yes',
-      newlead: (obj.new_leader || '').toLowerCase() === 'yes',
-      latestnews: obj.latest_news || obj.latestnews || '',
-      newsupdated: obj.news_updated || obj.newsupdated || '',
+      brand: o.brand||'', cat: o.category||'', tier: o.tier||'C', hq: o.hq||'',
+      name: o.contact_name||'', desig: o.designation||'', phone: o.phone||'',
+      email: o.email||'', url: o.linkedin||'',
+      status: o.status||'not_contacted',
+      pain: o.pain_point||'', pitch: o.pitch_angle||'',
+      warning: o.warning||'', notes: o.notes||'', strategy: o.strategy||'',
+      trust: o.trust_language==='Yes', newlead: o.new_leader==='Yes',
+      latestnews: o.latest_news||'', newsupdated: o.news_updated||'',
+      _row: i+2
     };
   }).filter(d => d.brand);
 }
 
-function loadData() {
+function loadSheet() {
   const btn = document.getElementById('refresh-btn');
-  const icon = document.getElementById('refresh-icon');
+  const ri = document.getElementById('ri');
   btn.classList.add('spinning');
-  icon.textContent = '↻';
 
-  // Use Web App to fetch data — bypasses Google Sheets CORS issues
-  fetch(WEB_APP_URL + '?action=getall&t=' + Date.now())
-    .then(r => r.json())
-    .then(json => {
-      if (!json.success) throw new Error(json.error || 'Unknown error');
-      RAW = json.data.map(row => {
-        // Normalize keys
-        const d = {};
-        Object.keys(row).forEach(k => {
-          d[k.toLowerCase().replace(/\s+/g,'_').replace(/[^a-z0-9_]/g,'')] = row[k];
-        });
-        return {
-          brand: d.brand || '',
-          cat: d.category || '',
-          tier: d.tier || 'C',
-          hq: d.hq || '',
-          name: d.contact_name || '',
-          desig: d.designation || '',
-          phone: d.phone || '',
-          email: d.email || '',
-          url: d.linkedin || '',
-          status: d.status || 'not_contacted',
-          pain: d.pain_point || '',
-          pitch: d.pitch_angle || '',
-          warning: d.warning || '',
-          notes: d.notes || '',
-          strategy: d.strategy || '',
-          trust: (d.trust_language || '').toLowerCase() === 'yes',
-          newlead: (d.new_leader || '').toLowerCase() === 'yes',
-          latestnews: d.latest_news || '',
-          newsupdated: d.news_updated || '',
-          _row: json.data.indexOf(row) + 2
-        };
-      }).filter(d => d.brand);
-      const now = new Date();
-      document.getElementById('last-sync').textContent =
-        'Last synced: ' + now.toLocaleTimeString('en-IN', {hour:'2-digit',minute:'2-digit'});
+  // Try gviz CSV — works when file is opened locally in logged-in Chrome
+  const url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:csv&sheet=Sheet1&t=' + Date.now();
+  fetch(url, {credentials:'include'})
+    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
+    .then(txt => {
+      const rows = parseCSV(txt);
+      if (rows.length < 2) throw new Error('Empty sheet response');
+      const fresh = csvToRAW(rows);
+      // Merge — keep local status edits, update everything else
+      RAW = fresh.map(d => {
+        const key = d.brand+'|'+d.cat;
+        d.status = ST[key] || d.status || 'not_contacted';
+        ST[key] = d.status;
+        return d;
+      });
+      document.getElementById('last-sync').textContent = 'Synced: ' + new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
       btn.classList.remove('spinning');
       render();
     })
     .catch(err => {
       btn.classList.remove('spinning');
-      document.getElementById('grid').innerHTML =
-        '<div class="error-msg">⚠ Could not load data.<br><small>' + err.message + '</small></div>';
-      document.getElementById('last-sync').textContent = 'Sync failed';
+      document.getElementById('last-sync').textContent = 'Using cached data';
+      // Fall back to seed data already in RAW — still renders
+      render();
+      console.warn('Sheet sync failed:', err.message);
+    });
+}
+
+// ── FETCH LATEST NEWS FOR ONE BRAND ──
+function fetchLatest(brand, category, rowIdx) {
+  const btn = document.getElementById('fb-'+rowIdx);
+  if (!btn || btn.classList.contains('loading')) return;
+  btn.classList.add('loading');
+  btn.querySelector('.fi').textContent = '↻';
+  btn.querySelector('.fl').textContent = 'Fetching…';
+
+  fetch(WEB_APP + '?brand=' + encodeURIComponent(brand) + '&category=' + encodeURIComponent(category), {credentials:'include'})
+    .then(r => r.json())
+    .then(json => {
+      if (json.success && json.news) {
+        const d = RAW.find(x => x._row === rowIdx);
+        if (d) d.latestnews = json.news;
+      }
+      btn.classList.remove('loading'); btn.classList.add('done');
+      btn.querySelector('.fi').textContent = '✓';
+      btn.querySelector('.fl').textContent = 'Updated';
+      setTimeout(() => {
+        btn.classList.remove('done');
+        btn.querySelector('.fi').textContent = '↻';
+        btn.querySelector('.fl').textContent = 'Fetch latest';
+        render();
+      }, 2000);
+    })
+    .catch(() => {
+      btn.classList.remove('loading');
+      btn.querySelector('.fi').textContent = '↻';
+      btn.querySelector('.fl').textContent = 'Fetch latest';
     });
 }
 
 // ── SORT ──
-function urgencyScore(d) {
+function urgScore(d) {
   const ss={meeting_scheduled:100,warm:90,waiting:80,contacted_no_response:60,not_contacted:40,proposal_sent:70,closed:-100};
   const ts={A:30,B:15,C:5};
-  let s = (ss[d.status]||0) + (ts[d.tier]||0);
-  if(d.pain) s+=20; if(d.newlead) s+=15; if(d.hq==='Mumbai') s+=5;
-  return s;
+  return (ss[ST[d.brand+'|'+d.cat]]||0)+(ts[d.tier]||0)+(d.pain?20:0)+(d.newlead?15:0)+(d.hq==='Mumbai'?5:0);
 }
 function sortData(arr) {
-  const mul = DIR==='desc' ? -1 : 1;
-  return [...arr].sort((a,b) => {
-    switch(SORT) {
-      case 'urgency': return mul*(urgencyScore(b)-urgencyScore(a));
-      case 'tier': return mul*({'A':0,'B':1,'C':2}[a.tier]||0) - ({'A':0,'B':1,'C':2}[b.tier]||0);
-      case 'brand': return mul*a.brand.localeCompare(b.brand);
-      case 'status': return mul*((STATUS_ORDER[a.status]??99)-(STATUS_ORDER[b.status]??99));
-      case 'hq': return mul*(a.hq||'').localeCompare(b.hq||'');
-      case 'pain': return mul*((a.pain?0:1)-(b.pain?0:1));
-      case 'newlead': return mul*((a.newlead?0:1)-(b.newlead?0:1));
+  const m=DIR==='desc'?-1:1;
+  return [...arr].sort((a,b)=>{
+    switch(SORT){
+      case 'urgency': return m*(urgScore(b)-urgScore(a));
+      case 'tier': return m*(({A:0,B:1,C:2}[a.tier]||0)-({A:0,B:1,C:2}[b.tier]||0));
+      case 'brand': return m*a.brand.localeCompare(b.brand);
+      case 'status': return m*((SO[ST[a.brand+'|'+a.cat]]??99)-(SO[ST[b.brand+'|'+b.cat]]??99));
+      case 'pain': return m*((a.pain?0:1)-(b.pain?0:1));
+      case 'newlead': return m*((a.newlead?0:1)-(b.newlead?0:1));
       default: return 0;
     }
   });
 }
-function toggleSortMenu(){
-  document.getElementById('sort-menu').classList.toggle('open');
-  document.getElementById('sort-btn').classList.toggle('active');
-}
+function toggleSort(){document.getElementById('sort-menu').classList.toggle('open');document.getElementById('sort-btn').classList.toggle('active')}
 function setSort(s){
   SORT=s;
-  document.querySelectorAll('.sort-item').forEach(el=>{el.classList.remove('on');el.innerHTML=el.textContent.trim();});
+  document.querySelectorAll('.sort-item').forEach(e=>{e.classList.remove('on');e.innerHTML=e.textContent.trim()});
   const el=document.getElementById('si-'+s);
-  if(el){el.classList.add('on');el.innerHTML=el.textContent+' <span>✓</span>';}
-  const labels={urgency:'Urgency',tier:'Tier',brand:'Brand A–Z',status:'Status',hq:'HQ City',pain:'Pain first',newlead:'New leader first'};
-  document.getElementById('sort-label').textContent=labels[s]||s;
+  if(el){el.classList.add('on');el.innerHTML=el.textContent+' <span>✓</span>'}
+  const lbl={urgency:'Urgency',tier:'Tier',brand:'Brand A–Z',status:'Status',pain:'Pain first',newlead:'New leader first'};
+  document.getElementById('slbl').textContent=lbl[s]||s;
   document.getElementById('sort-menu').classList.remove('open');
   document.getElementById('sort-btn').classList.remove('active');
   render();
 }
-function setDir(d){
-  DIR=d;
-  document.getElementById('dir-asc').classList.toggle('on',d==='asc');
-  document.getElementById('dir-desc').classList.toggle('on',d==='desc');
-  render();
-}
+function setDir(d){DIR=d;document.getElementById('dir-asc').classList.toggle('on',d==='asc');document.getElementById('dir-desc').classList.toggle('on',d==='desc');render()}
 
 // ── FILTER ──
 function sf(f,btn){
   AF=f;
-  document.querySelectorAll('.fb').forEach(b=>{
-    b.classList.remove('on');
-    ['x0','xA','xB','xC','xT','xN2','xP','xS'].forEach(c=>b.classList.remove(c));
-  });
-  const cm={all:'x0',A:'xA',B:'xB',C:'xC',today:'xT',new:'xN2',pain:'xP',stuck:'xS'};
-  btn.classList.add('on',cm[f]||'x0');
+  document.querySelectorAll('.fb').forEach(b=>{b.classList.remove('on');['x0','xA','xB','xC','xT','xN2','xP','xS'].forEach(c=>b.classList.remove(c))});
+  btn.classList.add('on',{all:'x0',A:'xA',B:'xB',C:'xC',today:'xT',new:'xN2',pain:'xP',stuck:'xS'}[f]||'x0');
   render();
 }
-function gap(d){return !d.name||d.name.toLowerCase().startsWith('check with')||d.name.trim()===''}
+function gap(d){const n=(d.name||'').trim().toLowerCase();return !n||n.startsWith('check with')}
 
 // ── STATUS DROPDOWN ──
 function toggleM(k){
-  document.querySelectorAll('.smenu').forEach(m=>{if(m.dataset.key!==k)m.classList.remove('open');});
-  const m=document.querySelector(`.smenu[data-key="${k}"]`);
+  document.querySelectorAll('.smenu').forEach(m=>{if(m.dataset.key!==k)m.classList.remove('open')});
+  const m=document.querySelector('.smenu[data-key="'+k+'"]');
   if(m)m.classList.toggle('open');
 }
-function setST(rowIdx,val,key){
-  // Update local data
-  const d=RAW.find(r=>r._row===rowIdx);
-  if(d)d.status=val;
-  document.querySelectorAll('.smenu').forEach(m=>m.classList.remove('open'));
-  render();
-  // Save to sheet silently
-  saveFieldToSheet(rowIdx, 10, val); // column J = Status (col 10)
-}
+function setST(k,v){ST[k]=v;document.querySelectorAll('.smenu').forEach(m=>m.classList.remove('open'));render()}
 
 // ── EDIT MODAL ──
 function openEdit(rowIdx){
-  const d=RAW.find(r=>r._row===rowIdx);
-  if(!d)return;
-  document.getElementById('modal-title').textContent=d.brand+' — '+d.cat;
-  document.getElementById('edit-row').value=rowIdx;
-  document.getElementById('edit-status').value=d.status||'not_contacted';
-  document.getElementById('edit-name').value=d.name||'';
-  document.getElementById('edit-desig').value=d.desig||'';
-  document.getElementById('edit-phone').value=d.phone||'';
-  document.getElementById('edit-email').value=d.email||'';
-  document.getElementById('edit-linkedin').value=d.url||'';
-  document.getElementById('edit-notes').value=d.notes||'';
-  document.getElementById('edit-pain').value=d.pain||'';
-  document.getElementById('edit-pitch').value=d.pitch||'';
-  document.getElementById('save-status').classList.remove('show');
-  document.getElementById('modal-overlay').classList.add('open');
+  const d=RAW.find(r=>r._row===rowIdx); if(!d) return;
+  document.getElementById('mtitle').textContent=d.brand+' — '+d.cat;
+  document.getElementById('erow').value=rowIdx;
+  document.getElementById('estatus').value=ST[d.brand+'|'+d.cat]||'not_contacted';
+  document.getElementById('ename').value=d.name||'';
+  document.getElementById('edesig').value=d.desig||'';
+  document.getElementById('ephone').value=d.phone||'';
+  document.getElementById('eemail').value=d.email||'';
+  document.getElementById('elinkedin').value=d.url||'';
+  document.getElementById('enotes').value=d.notes||'';
+  document.getElementById('epain').value=d.pain||'';
+  document.getElementById('smsg').textContent='';
+  document.getElementById('modal').classList.add('open');
 }
-function closeModal(e){
-  if(e&&e.target!==document.getElementById('modal-overlay'))return;
-  document.getElementById('modal-overlay').classList.remove('open');
-}
+function closeModal(e){if(e&&e.target!==document.getElementById('modal'))return;document.getElementById('modal').classList.remove('open')}
 function saveEdit(){
-  const rowIdx=parseInt(document.getElementById('edit-row').value);
-  const d=RAW.find(r=>r._row===rowIdx);
-  if(!d)return;
-
-  // Update local
-  d.status=document.getElementById('edit-status').value;
-  d.name=document.getElementById('edit-name').value;
-  d.desig=document.getElementById('edit-desig').value;
-  d.phone=document.getElementById('edit-phone').value;
-  d.email=document.getElementById('edit-email').value;
-  d.url=document.getElementById('edit-linkedin').value;
-  d.notes=document.getElementById('edit-notes').value;
-  d.pain=document.getElementById('edit-pain').value;
-  d.pitch=document.getElementById('edit-pitch').value;
-
-  document.getElementById('save-status').classList.add('show');
-
-  // Show instructions to save to sheet
-  setTimeout(()=>{
-    document.getElementById('modal-overlay').classList.remove('open');
-    render();
-  }, 800);
-
-  // Open sheet row for manual save
-  const sheetUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/edit#gid=0&range=A${rowIdx}`;
-  showSavePrompt(rowIdx, d);
-}
-
-function showSavePrompt(rowIdx, d){
-  // Build update URL - open sheet to the right row
-  const values = [
-    d.brand, d.cat, d.tier, d.hq, d.name, d.desig,
-    d.phone, d.email, d.url, d.status, d.pain, d.pitch,
-    d.warning, d.notes, d.strategy,
-    d.trust?'Yes':'No', d.newlead?'Yes':'No'
-  ];
-  // Store pending edits for copy
-  window._pendingEdit = {rowIdx, values, d};
-}
-
-// ── FETCH LATEST FOR SINGLE BRAND ──
-function fetchLatest(brand, category, rowIdx) {
-  const btn = document.getElementById('fetch-' + rowIdx);
-  if (!btn || btn.classList.contains('loading')) return;
-
-  btn.classList.add('loading');
-  btn.querySelector('.fetch-icon').textContent = '↻';
-  btn.querySelector('.fetch-label').textContent = 'Fetching...';
-
-  const url = WEB_APP_URL + '?brand=' + encodeURIComponent(brand) + '&category=' + encodeURIComponent(category);
-
-  fetch(url, {mode: 'no-cors'})
-    .then(() => {
-      // no-cors means we can't read response but request was sent
-      // Wait 8 seconds for script to complete then reload data
-      setTimeout(() => {
-        btn.classList.remove('loading');
-        btn.classList.add('done');
-        btn.querySelector('.fetch-icon').textContent = '✓';
-        btn.querySelector('.fetch-label').textContent = 'Updated';
-        // Reload from sheet after 2 more seconds
-        setTimeout(() => {
-          loadData();
-          btn.classList.remove('done');
-          btn.querySelector('.fetch-icon').textContent = '↻';
-          btn.querySelector('.fetch-label').textContent = 'Fetch latest';
-        }, 2000);
-      }, 8000);
-    })
-    .catch(() => {
-      btn.classList.remove('loading');
-      btn.querySelector('.fetch-icon').textContent = '↻';
-      btn.querySelector('.fetch-label').textContent = 'Fetch latest';
-    });
+  const rowIdx=parseInt(document.getElementById('erow').value);
+  const d=RAW.find(r=>r._row===rowIdx); if(!d) return;
+  const key=d.brand+'|'+d.cat;
+  ST[key]=document.getElementById('estatus').value;
+  d.name=document.getElementById('ename').value;
+  d.desig=document.getElementById('edesig').value;
+  d.phone=document.getElementById('ephone').value;
+  d.email=document.getElementById('eemail').value;
+  d.url=document.getElementById('elinkedin').value;
+  d.notes=document.getElementById('enotes').value;
+  d.pain=document.getElementById('epain').value;
+  document.getElementById('smsg').textContent='✓ Saved locally';
+  setTimeout(()=>{document.getElementById('modal').classList.remove('open');render()},600);
 }
 
 // ── RENDER ──
 function render(){
   const q=document.getElementById('srch').value.toLowerCase();
   const grid=document.getElementById('grid');
-  let filtered=[], cA=0,cB=0,cC=0,cP=0,cM=0;
+  let filtered=[],cA=0,cB=0,cC=0,cP=0,cM=0;
 
   RAW.forEach(d=>{
+    const s=ST[d.brand+'|'+d.cat]||'not_contacted';
     if(d.tier==='A')cA++;else if(d.tier==='B')cB++;else cC++;
     if(d.pain)cP++;
-    if(d.status==='meeting_scheduled')cM++;
+    if(s==='meeting_scheduled')cM++;
     if(AF==='A'&&d.tier!=='A')return;
     if(AF==='B'&&d.tier!=='B')return;
     if(AF==='C'&&d.tier!=='C')return;
-    if(AF==='today'&&!['meeting_scheduled','warm','waiting'].includes(d.status))return;
-    if(AF==='new'&&d.status!=='not_contacted')return;
+    if(AF==='today'&&!['meeting_scheduled','warm','waiting'].includes(s))return;
+    if(AF==='new'&&s!=='not_contacted')return;
     if(AF==='pain'&&!d.pain)return;
-    if(AF==='stuck'&&!['contacted_no_response','proposal_sent'].includes(d.status))return;
-    if(q){const hay=[d.brand,d.cat,d.name,d.hq,d.desig,d.pitch,d.notes,d.pain].map(x=>String(x||'')).join(' ').toLowerCase();if(!hay.includes(q))return;}
+    if(AF==='stuck'&&!['contacted_no_response','proposal_sent'].includes(s))return;
+    if(q){const hay=[d.brand,d.cat,d.name,d.hq,d.desig,d.pitch,d.notes,d.pain].join(' ').toLowerCase();if(!hay.includes(q))return}
     filtered.push(d);
   });
 
@@ -740,99 +493,89 @@ function render(){
   document.getElementById('sp').textContent=cP;
   document.getElementById('sm').textContent=cM;
 
-  const sorted=sortData(filtered);
   let html='';
-
-  sorted.forEach(d=>{
-    const s=d.status||'not_contacted';
+  sortData(filtered).forEach(d=>{
+    const k=d.brand+'|'+d.cat;
+    const s=ST[k]||'not_contacted';
+    const ri=d._row;
     const sLabel=SL[s]||s;
-    const rowIdx=d._row;
 
-    const statusHtml=`
-      <div class="swrap">
-        <div class="sbadge s-${s}" onclick="toggleM('row${rowIdx}')">
-          <span class="sdot"></span>${sLabel} ▾
-        </div>
-        <div class="smenu" data-key="row${rowIdx}">
-          ${Object.entries(SL).map(([v,l])=>`
-            <div class="sitem" onclick="setST(${rowIdx},'${v}','row${rowIdx}')">
-              <span class="sdot2" style="background:${SC[v]}"></span>${l}
-            </div>`).join('')}
-        </div>
-      </div>`;
+    const statusHtml='<div class="swrap"><div class="sbadge s-'+s+'" onclick="toggleM(''+k.replace(/'/g,"\'")+'')">'+'<span class="sdot"></span>'+sLabel+' ▾</div>'
+      +'<div class="smenu" data-key="'+k.replace(/'/g,"\'")+'">'+Object.entries(SL).map(([v,l])=>'<div class="sitem" onclick="setST(''+k.replace(/'/g,"\'")+'',''+v+'')"><span class="sdot2" style="background:'+SC[v]+'"></span>'+l+'</div>').join('')+'</div></div>';
 
-    const painHtml=d.pain?`<div class="pain"><span class="pain-icon">🔴</span><span>${d.pain}</span></div>`:'';
+    const painHtml=d.pain?'<div class="pain"><span class="pain-icon">🔴</span><span>'+d.pain+'</span></div>':'';
 
     let contactHtml='';
-    if(gap(d)){
-      contactHtml=`<div class="nocon">⚠ No confirmed contact — tap ✎ to add</div>`;
-    } else {
-      const hasWa=(String(d.phone||'')).toLowerCase().includes('whatsapp');
-      const hasPhone=d.phone&&!hasWa&&String(d.phone).trim();
+    if(gap(d)){contactHtml='<div class="nocon">⚠ No confirmed contact — tap ✎ to add</div>';}
+    else{
+      const hasWa=(d.phone||'').toLowerCase().includes('whatsapp');
+      const hasPhone=d.phone&&!hasWa&&d.phone.trim();
       const hasEmail=d.email&&d.email.includes('@');
       const hasUrl=d.url&&d.url.startsWith('http');
       let pills='';
-      if(hasUrl)pills+=`<a class="pill li" href="${d.url}" target="_blank">LinkedIn ↗</a>`;
-      if(hasWa)pills+=`<span class="pill wa">✓ WhatsApp</span>`;
-      if(hasPhone)pills+=`<span class="pill">${d.phone}</span>`;
-      if(hasEmail)pills+=`<span class="pill em">${d.email}</span>`;
-      contactHtml=`<div><div class="cname">${d.name}</div><div class="ctitle">${d.desig}</div>${pills?`<div class="cpills">${pills}</div>`:''}</div>`;
+      if(hasUrl)pills+='<a class="pill li" href="'+d.url+'" target="_blank">LinkedIn ↗</a>';
+      if(hasWa)pills+='<span class="pill wa">✓ WhatsApp</span>';
+      if(hasPhone)pills+='<span class="pill">'+d.phone+'</span>';
+      if(hasEmail)pills+='<span class="pill em">'+d.email+'</span>';
+      contactHtml='<div><div class="cname">'+d.name+'</div><div class="ctitle">'+d.desig+'</div>'+(pills?'<div class="cpills">'+pills+'</div>':'')+'</div>';
     }
 
     let tags='';
-    if(d.trust)tags+=`<span class="tag tr">Trust language</span>`;
-    if(d.newlead)tags+=`<span class="tag nl">New leader</span>`;
-    if(gap(d))tags+=`<span class="tag gp">Contact needed</span>`;
-    if(d.warning)tags+=`<span class="tag wn">⚠ Check note</span>`;
+    if(d.trust)tags+='<span class="tag tr">Trust language</span>';
+    if(d.newlead)tags+='<span class="tag nl">New leader</span>';
+    if(gap(d))tags+='<span class="tag gp">Contact needed</span>';
+    if(d.warning)tags+='<span class="tag wn">⚠ Check note</span>';
 
-    const notesHtml=(d.notes&&d.notes.trim())?`<div class="nblock"><div class="nlabel">Last note</div>${d.notes}</div>`:'';
-    const warnHtml=d.warning?`<div class="wblock">⚠ ${d.warning}</div>`:'';
-    let newsTimelineHtml='';
-    const pitchHtml=d.pitch?`<div class="pblock"><div class="plabel">Pitch angle</div>${d.pitch}</div>`:'';
-    const stratHtml=d.strategy?`<span class="sbadge2">${d.strategy}</span>`:`<span></span>`;
+    const notesHtml=(d.notes&&d.notes.trim()&&d.notes.toLowerCase()!=='none')?'<div class="nblock"><div class="nlabel">Last note</div>'+d.notes+'</div>':'';
+    const warnHtml=d.warning?'<div class="wblock">⚠ '+d.warning+'</div>':'';
+    const pitchHtml=d.pitch?'<div class="pblock"><div class="plabel">Pitch angle</div>'+d.pitch+'</div>':'';
 
-    html+=`
-    <div class="card">
-      <div class="strip ${d.tier}"></div>
-      <div class="card-head">
-        <div class="tbox ${d.tier}">${d.tier}</div>
-        <div class="binfo"><div class="bname">${d.brand}</div><div class="bcat">${d.cat}</div></div>
-        <div class="card-actions">
-          <div class="hqtag">${d.hq}</div>
-          <button class="edit-btn" onclick="openEdit(${rowIdx})" title="Edit">✎</button>
-        </div>
-      </div>
-      <div class="srow">${statusHtml}</div>
-      ${painHtml}
-      <div class="cbody">
-        ${contactHtml}
-        ${tags?`<div class="tags">${tags}</div>`:''}
-        ${notesHtml}
-        ${warnHtml}
-        ${pitchHtml}
-        ${newsTimelineHtml}
-      </div>
-      <div class="cfoot">${stratHtml}<span style="font-size:9.5px;color:var(--faint)">${d.hq}</span></div>
-    </div>`;
+    // News timeline
+    let newsHtml='';
+    const news=d.latestnews||'';
+    if(news.trim()){
+      const items=news.split(' | ').filter(x=>x.trim()).slice(0,5);
+      const itemsHtml=items.map(item=>{
+        const dm=item.match(/\[(\d{2} \w+ \d{4})\]/);
+        const date=dm?dm[1]:'';
+        const title=item.replace(/\[\d{2} \w+ \d{4}\]\s*/,'').trim();
+        const crisis=/crisis|scandal|fine|fraud|banned|probe|recall|complaint|backlash|cancel|crash/i.test(title);
+        return '<div class="news-item'+(crisis?' news-crisis':'')+'"><span class="news-date">'+date+'</span>'+title+'</div>';
+      }).join('');
+      newsHtml='<div class="news-block"><div class="news-head"><span>Latest news</span>'
+        +'<button class="fetch-btn" id="fb-'+ri+'" onclick="fetchLatest(''+d.brand.replace(/'/g,"\'")+'',''+( d.cat||'').replace(/'/g,"\'")+'','+ri+')">'
+        +'<span class="fi">↻</span> <span class="fl">Fetch latest</span></button></div>'+itemsHtml+'</div>';
+    } else {
+      newsHtml='<div style="display:flex;justify-content:flex-end">'
+        +'<button class="fetch-btn" id="fb-'+ri+'" onclick="fetchLatest(''+d.brand.replace(/'/g,"\'")+'',''+(d.cat||'').replace(/'/g,"\'")+'','+ri+')">'
+        +'<span class="fi">↻</span> <span class="fl">Fetch latest</span></button></div>';
+    }
+
+    const stratHtml=d.strategy?'<span class="sbadge2">'+d.strategy+'</span>':'<span></span>';
+
+    html+='<div class="card">'
+      +'<div class="strip '+d.tier+'"></div>'
+      +'<div class="card-head"><div class="tbox '+d.tier+'">'+d.tier+'</div>'
+      +'<div class="binfo"><div class="bname">'+d.brand+'</div><div class="bcat">'+d.cat+'</div></div>'
+      +'<div class="card-actions"><div class="hqtag">'+d.hq+'</div><button class="edit-btn" onclick="openEdit('+ri+')">✎</button></div></div>'
+      +'<div class="srow">'+statusHtml+'</div>'
+      +painHtml
+      +'<div class="cbody">'+contactHtml+(tags?'<div class="tags">'+tags+'</div>':'')+notesHtml+warnHtml+pitchHtml+newsHtml+'</div>'
+      +'<div class="cfoot">'+stratHtml+'<span style="font-size:9.5px;color:var(--faint)">'+d.hq+'</span></div>'
+      +'</div>';
   });
 
-  grid.innerHTML=html||`<div class="empty">No brands match the current filter.</div>`;
-  document.getElementById('cb').textContent=`Showing ${sorted.length} of ${RAW.length} brands`;
+  grid.innerHTML=html||'<div class="empty">No brands match the current filter.</div>';
+  document.getElementById('cb').textContent='Showing '+filtered.length+' of '+RAW.length+' brands';
 }
 
-function saveFieldToSheet(rowIdx, colIdx, value) {
-  // This requires Apps Script Web App — will be added when web app is set up
-  // For now changes are local until refresh
-}
-
-// Close menus on outside click
 document.addEventListener('click',e=>{
-  if(!e.target.closest('.sort-wrap')){document.getElementById('sort-menu').classList.remove('open');document.getElementById('sort-btn').classList.remove('active');}
+  if(!e.target.closest('.sort-wrap')){document.getElementById('sort-menu').classList.remove('open');document.getElementById('sort-btn').classList.remove('active')}
   if(!e.target.closest('.swrap'))document.querySelectorAll('.smenu').forEach(m=>m.classList.remove('open'));
 });
 
-// Load on startup
-loadData();
+// Load fresh data from sheet on startup
+loadSheet();
 </script>
 </body>
 </html>
