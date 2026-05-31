@@ -730,7 +730,7 @@ function render(){
     if(AF==='new'&&d.status!=='not_contacted')return;
     if(AF==='pain'&&!d.pain)return;
     if(AF==='stuck'&&!['contacted_no_response','proposal_sent'].includes(d.status))return;
-    if(q){const hay=[d.brand,d.cat,d.name,d.hq,d.desig,d.pitch,d.notes,d.pain].join(' ').toLowerCase();if(!hay.includes(q))return;}
+    if(q){const hay=[d.brand,d.cat,d.name,d.hq,d.desig,d.pitch,d.notes,d.pain].map(x=>String(x||'')).join(' ').toLowerCase();if(!hay.includes(q))return;}
     filtered.push(d);
   });
 
@@ -767,8 +767,8 @@ function render(){
     if(gap(d)){
       contactHtml=`<div class="nocon">⚠ No confirmed contact — tap ✎ to add</div>`;
     } else {
-      const hasWa=(d.phone||'').toLowerCase().includes('whatsapp');
-      const hasPhone=d.phone&&!hasWa&&d.phone.trim();
+      const hasWa=(String(d.phone||'')).toLowerCase().includes('whatsapp');
+      const hasPhone=d.phone&&!hasWa&&String(d.phone).trim();
       const hasEmail=d.email&&d.email.includes('@');
       const hasUrl=d.url&&d.url.startsWith('http');
       let pills='';
