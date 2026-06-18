@@ -496,7 +496,7 @@ function render(){
   document.getElementById('sm').textContent=cM;
 
   let html='';
-  sortData(filtered).forEach(d=>{
+  sortData(filtered).forEach(d=>{ try {
     const k=d.brand+'|'+d.cat;
     const s=ST[k]||'not_contacted';
     const ri=d._row;
@@ -510,14 +510,14 @@ function render(){
     let contactHtml='';
     if(gap(d)){contactHtml='<div class="nocon">⚠ No confirmed contact — tap ✎ to add</div>';}
     else{
-      const hasWa=(d.phone||'').toLowerCase().includes('whatsapp');
-      const hasPhone=d.phone&&!hasWa&&d.phone.trim();
+      const hasWa=(String(d.phone||'')).toLowerCase().includes('whatsapp');
+      const hasPhone=d.phone&&!hasWa&&String(d.phone).trim();
       const hasEmail=d.email&&d.email.includes('@');
       const hasUrl=d.url&&d.url.startsWith('http');
       let pills='';
       if(hasUrl)pills+='<a class="pill li" href="'+d.url+'" target="_blank">LinkedIn ↗</a>';
       if(hasWa)pills+='<span class="pill wa">✓ WhatsApp</span>';
-      if(hasPhone)pills+='<span class="pill">'+d.phone+'</span>';
+      if(hasPhone)pills+='<span class="pill">'+String(d.phone)+'</span>';
       if(hasEmail)pills+='<span class="pill em">'+d.email+'</span>';
       contactHtml='<div><div class="cname">'+d.name+'</div><div class="ctitle">'+d.desig+'</div>'+(pills?'<div class="cpills">'+pills+'</div>':'')+'</div>';
     }
@@ -565,6 +565,7 @@ function render(){
       +'<div class="cbody">'+contactHtml+(tags?'<div class="tags">'+tags+'</div>':'')+notesHtml+warnHtml+pitchHtml+newsHtml+'</div>'
       +'<div class="cfoot">'+stratHtml+'<span style="font-size:9.5px;color:var(--faint)">'+d.hq+'</span></div>'
       +'</div>';
+  } catch(e) { console.error('Card error for', d.brand, e.message); }
   });
 
   grid.innerHTML=html||'<div class="empty">No brands match the current filter.</div>';
